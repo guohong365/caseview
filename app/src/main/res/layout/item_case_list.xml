@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/selector_item_bg">
+
+    <ImageView
+        android:id="@+id/ctrl_image_view_case_preview"
+        android:layout_width="@dimen/action_size"
+        android:layout_height="@dimen/action_size"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:layout_margin="16dp"
+        android:contentDescription="@string/dummy_content"
+        android:scaleType="fitCenter"
+        app:srcCompat="@drawable/main_action_gallery_48dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@+id/ctrl_image_view_case_preview"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/t_case_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:gravity="start"
+            android:text="@string/dummy_content" />
+
+        <TextView
+            android:id="@+id/t_case_descript"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="32dp"
+            android:gravity="start"
+            android:text="@string/dummy_content"
+            android:textSize="12sp" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/ctrl_image_view_to_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="16dp"
+        android:contentDescription="@string/dummy_content"
+        app:srcCompat="@drawable/ic_arrow_left_24dp" />
+
+</RelativeLayout>

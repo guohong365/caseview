@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="action_size">64dp</dimen>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="assist_icon_size">24dp</dimen>
+    <dimen name="label_width">80dp</dimen>
+    <dimen name="vedio_height">240dp</dimen>
+</resources>

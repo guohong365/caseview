@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.uc.caseview.NewCaseActivity">
+
+    <LinearLayout
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/ed_user_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:hint="@string/label_user_name"
+            android:imeOptions="actionNext"
+            android:inputType="text"
+            android:lines="1"
+            android:maxLength="20" />
+
+        <EditText
+            android:id="@+id/ed_case_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:hint="@string/label_case_name"
+            android:imeOptions="actionNext"
+            android:inputType="text"
+            android:lines="1"
+            android:maxLength="20" />
+
+        <EditText
+            android:id="@+id/ed_case_comment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:ems="10"
+            android:gravity="start"
+            android:hint="@string/label_case_comment"
+            android:imeOptions="actionDone"
+            android:inputType="textMultiLine"
+            android:lines="5"
+            android:maxLength="200"
+            android:textAlignment="gravity" />
+
+    </LinearLayout>
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary">
+
+        <ImageView
+            android:id="@+id/m_action_ok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill"
+            android:contentDescription="@string/dummy_content"
+            android:scaleType="fitCenter"
+            app:layout_columnWeight="1"
+            app:layout_gravity="fill"
+            app:srcCompat="@drawable/selector_btn_ok" />
+
+        <ImageView
+            android:id="@+id/m_action_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill"
+            android:contentDescription="@string/dummy_content"
+            android:scaleType="fitCenter"
+            app:layout_columnWeight="1"
+            app:layout_gravity="fill"
+            app:srcCompat="@drawable/selector_btn_cancel" />
+
+    </GridLayout>
+
+</LinearLayout>

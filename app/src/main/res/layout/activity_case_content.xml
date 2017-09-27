@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.uc.caseview.CaseContentActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:visibility="visible">
+
+        <TextView
+            android:id="@+id/t_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:text="@string/dummy_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+
+        <TextView
+            android:id="@+id/t_comment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/t_title"
+            android:layout_marginStart="20dp"
+            android:text="@string/dummy_content" />
+
+        <TextView
+            android:id="@+id/t_user"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/t_title"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="5dp"
+            android:text="@string/dummy_content" />
+
+    </RelativeLayout>
+
+    <FrameLayout
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/ctrl_image_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </FrameLayout>
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:padding="4dp"
+        android:rowCount="1">
+
+        <ImageView
+            android:id="@+id/m_action_take_photo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill"
+            android:contentDescription="@string/action_take_photo_i"
+            android:scaleType="fitCenter"
+            app:layout_gravity="fill"
+            app:srcCompat="@drawable/selector_btn_camera" />
+
+        <ImageView
+            android:id="@+id/m_action_compare_split"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill_vertical|fill_horizontal"
+            android:contentDescription="@string/action_compare_split_i"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/selector_btn_compare_split" />
+
+        <ImageView
+            android:id="@+id/m_action_compare_stackup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill"
+            android:contentDescription="@string/action_compare_stackup_i"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/selector_btn_compare_stack_up" />
+
+        <ImageView
+            android:id="@+id/m_action_delete_photo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill"
+            android:contentDescription="@string/action_delete_photo_i"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/selector_btn_delete" />
+
+        <ImageView
+            android:id="@+id/m_action_export_case_photo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill"
+            android:contentDescription="@string/action_export_case_i"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/selector_btn_export" />
+    </GridLayout>
+
+</LinearLayout>

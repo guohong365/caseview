@@ -1,0 +1,133 @@
+<resources>
+    <!-- 基本信息 -->
+    <string name="app_name">TiXing</string>
+    <string name="dummy_content">DUMMY</string>
+    <string name="copyright">Coptyright©（2017）</string>
+    <string name="company_name">北京厚德天赢科技有限公司</string>
+    <!-- 主菜单 -->
+    <string name="action_name_case">Cases</string>
+    <string name="action_name_search">Search</string>
+    <string name="action_name_settings">Settigns</string>
+    <string name="action_name_gallery">Gallery</string>
+
+    <string name="title_activity_settings">Settings</string>
+    <string name="init_error">initialize app on startup failed</string>
+
+    <!-- 案件列表页-->
+    <string name="action_create">Create</string>
+    <string name="action_create_new_case_i">Create new Case</string>
+    <string name="action_delete">Delete</string>
+    <string name="action_delete_case_i">Delete selected case</string>
+    <string name="action_edit">Edit</string>
+    <string name="action_edit_case_i">Modify info of selected case.</string>
+    <string name="action_replace_photo">Replace</string>
+    <string name="action_replace_photo_i">Replace current photo</string>
+
+    <string name="format_image_count" formatted="false">%s (%d photos)</string>
+    <string name="info_bath_delete_case_failed">Delete selected case(s) failed.</string>
+    <string name="info_insert_case_failed">Save the new case info failed.</string>
+    <string name="info_delete_case_failed">Delete the case failed.</string>
+    <string name="info_update_case_failed">Save the modified case failed.</string>
+    <string name="info_save_photo_taked_failed">Save the photo tacked failed.</string>
+
+    <!-- 案件内容菜单 -->
+    <string name="action_take_photo">Take</string>
+    <string name="action_take_photo_i">Take a photo from camera</string>
+    <string name="action_compare_split">Compare</string>
+    <string name="action_compare_split_i">compare by left to right</string>
+    <string name="action_compare_stackup">Compare</string>
+    <string name="action_compare_stackup_i">compare by stackup</string>
+
+    <string name="action_edit_photo_i">corp, rote, comment(etc.) the selected photo</string>
+    <string name="action_delete_photo_i">delete selected photos</string>
+    <string name="action_export">Export</string>
+    <string name="action_export_case_i">Export photos related the current case</string>
+    <string name="action_save">Save</string>
+    <string name="action_cancel">Cancel</string>
+    <string name="action_ok">Ok</string>
+    <string name="action_yes">Yes</string>
+    <string name="action_no">No</string>
+
+    <string name="message_request_to_compared">Please choose two photo for compared.</string>
+    <string name="message_request_to_deleted">Please choose photos to deleted.</string>
+    <string name="message_request_to_exported">Please choose photos to exported.</string>
+    <string name="message_if_delete_case">Ensure to delete the case and all related photos?</string>
+
+    <!-- 案件录入页 -->
+    <string name="label_case_name">Case Name</string>
+    <string name="label_user_name">Operator</string>
+    <string name="label_case_comment">Description</string>
+    <string name="label_select_all">All</string>
+    <!--  提示信息 -->
+    <string name="info_operator_empty">The operator user name is not allowed empty.</string>
+    <string name="info_case_name_empty">The case name is not allowed empty</string>
+    <string name="info_case_name_aready_exists">The case name is aready exists.</string>
+
+    <string name="label_start_date">Begin Time</string>
+    <string name="label_end_date">End Time</string>
+
+    <string name="system_dialog_title">系统提示</string>
+
+
+    <string-array name="message_box_buttons_ok">
+        <item>Ok</item>
+    </string-array>
+    <string-array name="message_box_buttons_ok_cancel">
+        <item>Ok</item>
+        <item>Cancel</item>
+    </string-array>
+    <string-array name="message_box_buttons_yes_no">
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
+    <string-array name="message_box_buttons_yea_no_cancel">
+        <item>Yes</item>
+        <item>No</item>
+        <item>Cancel</item>
+    </string-array>
+
+    <string name="title_activity_image_fullscreen_view">ImageFullscreenViewActivity</string>
+    <string name="title_activity_case_content">CaseContentActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_activity_new_case">NewCaseActivity</string>
+
+    <string name="action_image_from_camera">拍照</string>
+    <string name="action_image_from_video">摄像头</string>
+    <string name="action_connect_camera_ap">连接摄像头</string>
+    <string name="l_dev_type">Type:</string>
+    <string name="l_dev_mac">MAC:</string>
+    <string name="l_dev_sn">Serial No:</string>
+    <string name="l_dev_ip">IP:</string>
+    <string name="l_dev_status">Status:</string>
+    <string name="txt_btn_connect_dev">connect</string>
+    <string name="txt_btn_disconnect_dev">disconnect</string>
+    <string name="txt_btn_remove">remove</string>
+    <string-array name="pic_type">
+        <item>All</item>
+        <item>Alarm</item>
+        <item>Detection</item>
+        <item>Normal</item>
+        <item>Remote control</item>
+        <item>Key</item>
+        <item>Time delay shot</item>
+        <item>Continuous shooting</item>
+    </string-array>
+    <string name="error_ap_disconnect">deivce connect failed!</string>
+    <string name="txt_btn_play">play</string>
+    <string name="txt_btn_stop">stop</string>
+    <string name="txt_btn_capture">capture</string>
+    <string name="txt_btn_full_screen">full screen</string>
+    <string-array name="record_type">
+        <item>All</item>
+        <item>Alarm</item>
+        <item>Detection</item>
+        <item>Normal</item>
+        <item>Manual</item>
+        <item>Remote</item>
+    </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
