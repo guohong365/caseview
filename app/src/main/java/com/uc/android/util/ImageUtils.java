@@ -4,9 +4,11 @@ import android.graphics.BitmapFactory;
 import android.media.ExifInterface;
 
 import com.uc.caseview.entity.ImageItem;
+import com.uc.caseview.utils.SysUtils;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.util.Date;
 
 /**
  * Created by guoho on 2017/9/27.
@@ -18,16 +20,20 @@ public class ImageUtils {
         try {
             ImageItem imageInfo=new ImageItem();
             imageInfo.setName(imageFile.getName());
-            imageInfo.setSize(imageFile.length());
-
             FileInputStream stream=new FileInputStream(imageFile);
+            imageInfo.setSize(imageFile.length());
             ExifInterface exifInterface = new ExifInterface(stream);
             float[] latLong=new float[2];
             if(exifInterface.getLatLong(latLong)){
                 imageInfo.setLatitude(latLong[0]);
                 imageInfo.setLongitude(latLong[1]);
             }
-            String datetime = exifInterface.getAttribute(ExifInterface.TAG_DATETIME);// 拍摄时间
+            //String datetime = exifInterface.getAttribute(ExifInterface.TAG_DATETIME);// 拍摄时间
+            Date now=new Date();
+            imageInfo.setDateTaken(now.getTime());
+            imageInfo.setTakeTime(SysUtils.dataTimeFormat.format(now));
+            imageInfo.setDate(SysUtils.dateFormat.format(now));
+
             imageInfo.setHeight(exifInterface.getAttributeInt(ExifInterface.TAG_IMAGE_LENGTH, 0));
             imageInfo.setWidth(exifInterface.getAttributeInt(ExifInterface.TAG_IMAGE_WIDTH,0));
             imageInfo.setOrientation(exifInterface.getAttributeInt(ExifInterface.TAG_ORIENTATION, 0));

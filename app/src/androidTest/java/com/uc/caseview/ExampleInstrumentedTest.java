@@ -2,14 +2,19 @@ package com.uc.caseview;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.PointF;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 import android.util.Log;
 
+import com.uc.android.drawing.DrawObject;
+import com.uc.android.drawing.impl.RectangleImpl;
 import com.uc.caseview.entity.CaseItem;
 import com.uc.caseview.entity.EntityUtils;
+import com.uc.caseview.utils.LogUtils;
 
 import org.greenrobot.greendao.query.QueryBuilder;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -30,6 +35,7 @@ public class ExampleInstrumentedTest {
     static final String TAG = "caseview";
     CaseViewApp mApp;
 
+    @Ignore
     @Test
     public void useAppContext() throws Exception {
         QueryBuilder.LOG_SQL = true;
@@ -71,6 +77,16 @@ public class ExampleInstrumentedTest {
         intent.setClass(myApp, CaseListViewActivity.class);
         myApp.startActivity(intent);
 
+    }
+    @Test
+    public void test(){
+        DrawObject drawObject=new RectangleImpl(100,100, 200, 300);
+        drawObject.setPosition(new PointF(0,100));
+        PointF rt= drawObject.local2Parent(new PointF(0,0));
+        LogUtils.logItem("TEST:", rt);
+        drawObject.rotate(90);
+        rt= drawObject.local2Parent(new PointF(0,-50));
+        LogUtils.logItem("TEST:", rt);
     }
 
 }

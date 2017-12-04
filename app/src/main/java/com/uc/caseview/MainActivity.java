@@ -10,13 +10,21 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
+import com.uc.caseview.entity.CompareParams;
+import com.uc.caseview.entity.EntityUtils;
+import com.uc.caseview.entity.ImageItem;
 import com.uc.caseview.utils.GlobalHolder;
 import com.uc.caseview.utils.SysUtils;
+import com.uc.caseview.view.Action;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.uc.caseview.entity.RequestParams.KEY_REQUEST;
+import static com.uc.caseview.view.Action.COMPARE_SPLIT;
 
 
 public class MainActivity extends ActivityBase implements View.OnClickListener{
@@ -49,6 +57,21 @@ public class MainActivity extends ActivityBase implements View.OnClickListener{
         imageView.setOnClickListener(this);
         imageView = findViewById(R.id.action_gallery);
         imageView.setOnClickListener(this);
+        final Button button = (Button) findViewById(R.id.button_test);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                List<ImageItem> items= EntityUtils.getSession().getImageItemDao().queryBuilder().limit(2).build().list();
+                Intent intent=new Intent();
+                intent.setClass(button.getContext(), CompareActivity.class);
+                CompareParams params=new CompareParams(
+                        Action.COMPARE_SPLIT,
+                        null,
+                        new String[]{items.get(0).getName(), items.get(1).getName()});
+                intent.putExtra(KEY_REQUEST,params);
+                startActivityForResult(intent, COMPARE_SPLIT.getCode());
+            }
+        });
         checkAndRequestPermission();
     }
     void checkAndRequestPermission(){

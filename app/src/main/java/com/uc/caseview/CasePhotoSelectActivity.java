@@ -1,6 +1,7 @@
 package com.uc.caseview;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -20,7 +21,6 @@ import com.uc.caseview.entity.EntityUtils;
 import com.uc.caseview.entity.ImageItem;
 import com.uc.caseview.entity.RequestParams;
 import com.uc.caseview.utils.GlideApp;
-import com.uc.caseview.utils.GlobalHolder;
 import com.uc.caseview.utils.LogUtils;
 
 import java.util.ArrayList;
@@ -69,10 +69,12 @@ public class CasePhotoSelectActivity extends ActivityBase {
         final RecyclerView recyclerView=(RecyclerView) findViewById(R.id.ctrl_recycler_view);
         List<Selectable> list=new ArrayList<>();
         list.addAll(imageItems);
-        recyclerView.setLayoutManager(new GridLayoutManager(this, 3, LinearLayoutManager.VERTICAL, false));
+        int orient=getRequestedOrientation();
+        int columns=getResources().getConfiguration().orientation== Configuration.ORIENTATION_LANDSCAPE ? 5:3;
+        recyclerView.setLayoutManager(new GridLayoutManager(this, columns, LinearLayoutManager.VERTICAL, false));
         imageAdapter=new ImageItemAdapter(
                 this,list,
-                new ImageItemViewViewHolderFactory(this, GlobalHolder.gridColumns),
+                new ImageItemViewViewHolderFactory(this, columns),
                 GlideApp.with(this));
         recyclerView.setAdapter(imageAdapter);
         imageAdapter.setSelectable(true);

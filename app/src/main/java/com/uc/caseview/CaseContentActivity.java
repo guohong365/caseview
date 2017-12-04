@@ -1,6 +1,7 @@
 package com.uc.caseview;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 
 import com.uc.android.adapter.GridLayoutManagerFactory;
 import com.uc.android.model.DataGroup;
+import com.uc.android.util.ImageUtils;
 import com.uc.android.view.OnGroupedItemClickListener;
 import com.uc.caseview.adapter.ImageGroupListViewAdapter;
 import com.uc.caseview.adapter.holder.ImageGroupViewViewHolderFactory;
@@ -23,7 +25,6 @@ import com.uc.caseview.entity.ImageGroupItem;
 import com.uc.caseview.entity.ImageItem;
 import com.uc.caseview.entity.RequestParams;
 import com.uc.caseview.utils.GlideApp;
-import com.uc.caseview.utils.GlobalHolder;
 import com.uc.caseview.utils.LogUtils;
 import com.uc.caseview.view.Action;
 
@@ -104,10 +105,13 @@ public class CaseContentActivity extends ActivityBase {
         List<ImageItem> imageItems = loadImagesByCase(caseItem.getId());
         SortedMap<String, List<ImageItem>> map = EntityUtils.buildDateGroupedImageItem(imageItems);
         List<ImageGroupItem> groupList=EntityUtils.buildDateGroupedImageList(map, caseItem);
+        int orient=getRequestedOrientation();
+        int columns=getResources().getConfiguration().orientation== Configuration.ORIENTATION_LANDSCAPE? 5:3;
         groupAdapter=new ImageGroupListViewAdapter(
                 this, groupList,
-                new ImageGroupViewViewHolderFactory(this, new GridLayoutManagerFactory(this, GlobalHolder.gridColumns, LinearLayoutManager.VERTICAL)),
-                new ImageItemViewViewHolderFactory(this, GlobalHolder.gridColumns),GlideApp.with(this));
+                new ImageGroupViewViewHolderFactory(this, new GridLayoutManagerFactory(this, columns, LinearLayoutManager.VERTICAL)),
+                new ImageItemViewViewHolderFactory(this,columns),
+                GlideApp.with(this));
         recyclerView.setAdapter(groupAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         groupAdapter.setOnGroupedItemClickListener(new OnGroupedItemClickListener() {
@@ -134,7 +138,10 @@ public class CaseContentActivity extends ActivityBase {
 
     @Override
     protected void onPhotoTaken(File photoFile) {
-        ImageItem imageItem=new ImageItem();
+        ImageItem imageItem= ImageUtils.getPhotoExif(photoFile);
+        imageItem.setCategoryId(caseItem.getId());
+        LogUtils.logItem(TAG, imageItem);
+        groupAdapter.insertImageItem(imageItem);
     }
 
     @Override

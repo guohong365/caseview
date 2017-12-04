@@ -8,13 +8,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.uc.caseview.entity.CompareParams;
-import com.uc.caseview.view.CompareViewBase;
+import com.uc.caseview.view.CompareView;
 
 import static com.uc.caseview.entity.RequestParams.KEY_REQUEST;
 
 public class CompareActivity extends ActivityBase {
     CompareParams params;
-    CompareViewBase compareView;
+    CompareView compareView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,7 +22,7 @@ public class CompareActivity extends ActivityBase {
         setContentView(R.layout.activity_compare);
         ViewGroup frame=(ViewGroup) findViewById(R.id.layout_frame);
         View view=getLayoutInflater().inflate(R.layout.item_split_compare_view, frame);
-        compareView= (CompareViewBase) frame.findViewById(R.id.ctrl_surface_view);
+        compareView= (CompareView) frame.findViewById(R.id.ctrl_surface_view);
         compareView.setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
             @Override
             public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
@@ -30,8 +30,10 @@ public class CompareActivity extends ActivityBase {
                 menuInflater.inflate(R.menu.compare_view, menu);
             }
         });
+        setFullScreenMode(FULL_SCREEN_MODE.FULL_SCREEN_HIDE_ALL);
+        compareView.setImages(params.images);
+        compareView.init();
     }
-
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         switch (item.getItemId()){
@@ -43,5 +45,4 @@ public class CompareActivity extends ActivityBase {
         }
         return true;
     }
-
 }

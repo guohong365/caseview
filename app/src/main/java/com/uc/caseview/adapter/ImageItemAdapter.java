@@ -42,17 +42,10 @@ public class ImageItemAdapter extends RecyclerViewAdapterBase<ImageItemViewHolde
                 e.printStackTrace();
             }
         } else {
-            Log.v(TAG, "file exists. file size=[" +  1+ "]");
-            try {
-                Log.v(TAG, "\n[" + file.toString() + "]\n [" + file.getCanonicalPath() + "]\n[" + file.getAbsolutePath() + "]");
-                bitmap= BitmapFactory.decodeFile(file.getAbsolutePath());
-                if(bitmap==null){
-                    Log.v(TAG, "load bitmap failed.");
-                } else {
-                    Log.v(TAG, "load bitmap successfully");
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
+            Log.v(TAG, "file exists. file size=[" + 1 + "]");
+            bitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
+            if (bitmap == null) {
+                Log.w(TAG, "load bitmap failed.");
             }
         }
         glideRequest
