@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface ObjectsGroup extends DrawObject{
     List<DrawObject> getItems();
+    int getCount();
     ObjectsGroup add(DrawObject item);
     ObjectsGroup add(int index, DrawObject item);
     void remove(DrawObject item);

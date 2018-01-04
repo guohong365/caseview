@@ -2,4 +2,10 @@
 <resources>
     <item type="id" name="loader_id_media_store_data" />
     <item name="case_loader" type="id"/>
+    <item type="id" name="action_toggle_full_caching" />
+    <item type="id" name="action_select_all" />
+    <item type="id" name="viewpager" />
+
+    <item type="id" name="mediadata_tag_target" />
+    <item type="id" name="mediadata_tag_viewtype" />
 </resources>

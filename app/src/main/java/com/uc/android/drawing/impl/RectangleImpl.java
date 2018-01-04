@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.RectF;
+import android.graphics.Region;
 import android.util.SizeF;
 
 import com.uc.android.drawing.Rectangle;
@@ -71,6 +72,11 @@ public class RectangleImpl extends AbstractDrawObject implements Rectangle {
     @Override
     public RectF getBounds() {
         return new RectF(getPosition().x, getPosition().y, getPosition().x + getWidth(), getPosition().y +getHeight());
+    }
+
+    @Override
+    public Region getRegion() {
+        return new Region(0,0, (int)getWidth(), (int)getHeight() );
     }
 
     @Override

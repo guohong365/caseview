@@ -5,8 +5,11 @@ import android.graphics.Color;
 import android.graphics.Path;
 import android.graphics.PointF;
 import android.graphics.RectF;
+import android.graphics.Region;
 import android.util.SizeF;
 
+import com.uc.android.OnSelectedChangedListener;
+import com.uc.android.Selectable;
 import com.uc.android.drawing.AlignMode;
 import com.uc.android.drawing.ArrangeMode;
 import com.uc.android.drawing.DrawObject;
@@ -17,6 +20,12 @@ import java.util.List;
 
 public class ObjectsContainerImpl extends RectangleImpl implements ObjectsContainer {
     private ObjectsGroup group;
+    private ObjectsGroup selectedItems;
+
+    @Override
+    public ObjectsGroup getSelectedItems() {
+        return selectedItems;
+    }
 
     public ObjectsContainerImpl() {
     }
@@ -31,6 +40,7 @@ public class ObjectsContainerImpl extends RectangleImpl implements ObjectsContai
     @Override
     protected void init(){
         super.init();
+        selectedItems=new ObjectsGroupImpl();
         group=new ObjectsGroupImpl();
         setShowBorder(false);
         setBorderAppearance(new LineAppearanceImpl(Color.YELLOW, 1, 5));
@@ -121,6 +131,11 @@ public class ObjectsContainerImpl extends RectangleImpl implements ObjectsContai
     }
 
     @Override
+    public Region getRegion() {
+        return null;
+    }
+
+    @Override
     public Path getClip() {
         Path path=new Path();
         RectF bounds=getBounds();
@@ -134,12 +149,27 @@ public class ObjectsContainerImpl extends RectangleImpl implements ObjectsContai
     }
 
     @Override
+    public int getCount() {
+        return group.getCount();
+    }
+
+    @Override
     public ObjectsGroup add(DrawObject item) {
-        return group.add(item);
+        return add(0, item);
     }
 
     @Override
     public ObjectsGroup add(int index, DrawObject item) {
+        item.setOnSelectedChangedListener(new OnSelectedChangedListener() {
+            @Override
+            public void onSelectedChanged(Selectable sender, boolean selected) {
+                if(selected){
+                    selectedItems.add(0, (DrawObject) sender);
+                } else {
+                    selectedItems.remove((DrawObject) sender);
+                }
+            }
+        });
         return group.add(index, item);
     }
 

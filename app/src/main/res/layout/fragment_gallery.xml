@@ -3,9 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.uc.caseview.fragment.GalleryFragment">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+   <TextView
         android:id="@+id/t_message"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

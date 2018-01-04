@@ -2,12 +2,14 @@ package com.uc.caseview;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Matrix;
 import android.graphics.PointF;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 import android.util.Log;
 
 import com.uc.android.drawing.DrawObject;
+import com.uc.android.drawing.MatrixUtil;
 import com.uc.android.drawing.impl.RectangleImpl;
 import com.uc.caseview.entity.CaseItem;
 import com.uc.caseview.entity.EntityUtils;
@@ -88,5 +90,30 @@ public class ExampleInstrumentedTest {
         rt= drawObject.local2Parent(new PointF(0,-50));
         LogUtils.logItem("TEST:", rt);
     }
+    static final String TAG_MATRIX="TEST_MATRIX";
+    @Test
+    public void testMatrix(){
+        PointF[] src=new PointF[]{new PointF(0,0), new PointF(100,0)};
+        Matrix matrix=new Matrix();
+        //matrix.setTranslate(100,100);
 
+        Matrix invert=new Matrix();
+
+        Log.v(TAG_MATRIX, String.format("0-[%f,%f][%f,%f]", src[0].x, src[0].y, src[1].x, src[1].y ));
+        matrix.postRotate(45);
+        PointF[]dest= MatrixUtil.mapPoints(matrix, src);
+        Log.v(TAG_MATRIX, String.format("1-[%f,%f][%f,%f]", dest[0].x, dest[0].y, dest[1].x, dest[1].y ));
+        matrix.postRotate(90,30, 0);
+        dest= MatrixUtil.mapPoints(matrix, src);
+        Log.v(TAG_MATRIX, String.format("2-[%f,%f][%f,%f]", dest[0].x, dest[0].y, dest[1].x, dest[1].y ));
+        matrix.preTranslate(100,100);
+        dest= MatrixUtil.mapPoints(matrix, src);
+        Log.v(TAG_MATRIX, String.format("3-[%f,%f][%f,%f]", dest[0].x, dest[0].y, dest[1].x, dest[1].y ));
+
+        matrix.invert(invert);
+        src=MatrixUtil.mapPoints(invert, dest);
+        Log.v(TAG_MATRIX, String.format("4-[%f,%f][%f,%f]", src[0].x, src[0].y, src[1].x, src[1].y ));
+
+
+    }
 }

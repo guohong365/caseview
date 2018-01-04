@@ -14,6 +14,7 @@ import com.uc.android.drawing.ImageObject;
 public class ImageObjectImpl extends RectangleImpl implements ImageObject {
     Bitmap image;
     Path clip;
+
     public ImageObjectImpl(PointF position, SizeF size, Bitmap image) {
         super(position, size);
         setImage(image);
@@ -42,6 +43,11 @@ public class ImageObjectImpl extends RectangleImpl implements ImageObject {
                 new Rect(0,0, getImage().getWidth(), getImage().getHeight()),
                 new RectF(0,0, getSize().getWidth(), getSize().getHeight()),
                 paint);
+    }
+
+    @Override
+    public boolean isShowBorder() {
+        return  isSelected() || super.isShowBorder();
     }
 
     @Override

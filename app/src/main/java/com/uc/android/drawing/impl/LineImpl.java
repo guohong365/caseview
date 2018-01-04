@@ -2,8 +2,10 @@ package com.uc.android.drawing.impl;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.graphics.PointF;
 import android.graphics.RectF;
+import android.graphics.Region;
 import android.util.SizeF;
 
 import com.uc.android.drawing.Appearance;
@@ -89,6 +91,16 @@ public class LineImpl extends AbstractDrawObject implements Line {
         float left=getPosition().x + (0 <  getEnd().x ? 0:  getEnd().x);
         float top=getPosition().y + (0 < getEnd().y? 0: getEnd().y);
         return new RectF(left, top, left+ size.getWidth(), top+size.getHeight());
+    }
+
+    @Override
+    public Region getRegion() {
+        Region region=new Region();
+        Path path=new Path();
+        path.lineTo(_end.x, _end.y);
+        region.setPath(path, null);
+
+        return null;
     }
 
     @Override

@@ -21,7 +21,7 @@ public class CompareActivity extends ActivityBase {
         params = getIntent().getExtras().getParcelable(KEY_REQUEST);
         setContentView(R.layout.activity_compare);
         ViewGroup frame=(ViewGroup) findViewById(R.id.layout_frame);
-        View view=getLayoutInflater().inflate(R.layout.item_split_compare_view, frame);
+        View view=getLayoutInflater().inflate(R.layout.item_compare_view, frame);
         compareView= (CompareView) frame.findViewById(R.id.ctrl_surface_view);
         compareView.setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
             @Override
@@ -42,7 +42,9 @@ public class CompareActivity extends ActivityBase {
                 break;
             case R.id.m_action_replace_photo:
                 break;
+
         }
         return true;
     }
+
 }

@@ -1,12 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <!-- Declare custom theme attributes that allow changing which styles are
-         used for button bars depending on the API level.
-         ?android:attr/buttonBarStyle is new as of API 11 so this is
-         necessary to support previous API levels. -->
     <declare-styleable name="ButtonBarContainerTheme">
         <attr name="metaButtonBarStyle" format="reference" />
         <attr name="metaButtonBarButtonStyle" format="reference" />
     </declare-styleable>
+    <declare-styleable name="Theme.GalleryBase">
+        <attr name="listPreferredItemHeightSmall" format="dimension" />
+        <attr name="switchStyle" format="reference" />
+    </declare-styleable>
 
+    <!-- Camera resources below -->
+
+    <declare-styleable name="CameraPreference">
+        <attr name="title" format="string" />
+    </declare-styleable>
+    <declare-styleable name="ListPreference">
+        <attr name="key" format="string" />
+        <attr name="defaultValue" format="string|reference" />
+        <attr name="entryValues" format="reference" />
+        <attr name="entries" format="reference" />
+        <attr name="labelList" format="reference" />
+    </declare-styleable>
+    <declare-styleable name="IconIndicator">
+        <attr name="icons" format="reference" />
+        <attr name="modes" format="reference" />
+    </declare-styleable>
+    <declare-styleable name="IconListPreference">
+        <!-- If a preference does not have individual icons for each entry, it can has a single icon to represent it. -->
+        <attr name="singleIcon" format="reference" />
+        <attr name="icons" />
+        <attr name="largeIcons" format="reference" />
+        <attr name="images" format="reference" />
+    </declare-styleable>
+    <declare-styleable name="MultiToggleImageButton">
+        <attr name="imageIds" format="reference" />
+        <attr name="contentDescriptionIds" format="reference" />
+    </declare-styleable>
+    <declare-styleable name="RadioOptions">
+        <attr name="selected_drawable" format="reference" />
+    </declare-styleable>
 </resources>

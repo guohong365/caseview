@@ -3,6 +3,7 @@ package com.uc.android.drawing.impl;
 import android.graphics.Canvas;
 import android.graphics.PointF;
 import android.graphics.RectF;
+import android.graphics.Region;
 import android.util.SizeF;
 
 import com.uc.android.drawing.DrawObject;
@@ -29,7 +30,10 @@ public class ObjectsGroupImpl extends AbstractDrawObject implements ObjectsGroup
     public List<DrawObject> getItems() {
         return items;
     }
-
+    @Override
+    public int getCount(){
+        return items.size();
+    }
     @Override
     public void remove(DrawObject item) {
         items.remove(item);
@@ -134,5 +138,14 @@ public class ObjectsGroupImpl extends AbstractDrawObject implements ObjectsGroup
         for(DrawObject item:items){
             item.draw(canvas);
         }
+    }
+
+    @Override
+    public Region getRegion(){
+        Region region=new Region();
+        for(DrawObject item:items){
+            region.op(item.getRegion(), Region.Op.UNION);
+        }
+        return region;
     }
 }

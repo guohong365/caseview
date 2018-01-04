@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <ListPreference
+        android:key="key_settings_camera_flash"
+        android:title="@string/pref_title_camera_flash"
+        android:entries="@array/pref_list_label_camera_flash"
+        android:entryValues="@array/pref_list_value_camera_flash"
+        android:defaultValue="@string/pref_default_camera_flash"/>
+
+</PreferenceScreen>

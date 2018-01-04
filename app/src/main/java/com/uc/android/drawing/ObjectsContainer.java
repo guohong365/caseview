@@ -3,6 +3,7 @@ package com.uc.android.drawing;
 import java.util.List;
 
 public interface ObjectsContainer extends Rectangle, ObjectsGroup{
+    ObjectsGroup getSelectedItems();
     ObjectsGroup getGroup();
     void toFront(DrawObject item);
     void toBack(DrawObject item);

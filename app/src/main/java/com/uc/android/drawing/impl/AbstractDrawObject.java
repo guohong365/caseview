@@ -7,6 +7,7 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PointF;
 import android.graphics.RectF;
+import android.graphics.Region;
 import android.support.annotation.NonNull;
 
 import com.uc.android.AbstractSelectable;
@@ -23,10 +24,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import static android.R.attr.angle;
 
 public abstract class AbstractDrawObject extends AbstractSelectable implements DrawObject {
-    static final LineAppearance defaultLineAppearance = new LineAppearanceImpl(Color.BLACK, 1.0f, 0);
+    static final LineAppearance defaultLineAppearance = new LineAppearanceImpl(Color.YELLOW, 1.0f, 0);
     static final FillAppearance defaultTrackAppearance = new FillAppearanceImpl(Color.YELLOW, 0.5f);
     static final FillAppearance defaultBackground = new FillAppearanceImpl(Color.TRANSPARENT, 1.0f, 0);
     private static final float HANDLE_RADIUS = 30;
@@ -253,11 +253,17 @@ public abstract class AbstractDrawObject extends AbstractSelectable implements D
         canvas.drawRect(0, 0, getSize().getWidth(), getSize().getHeight(), paint);
     }
 
+    protected Path getHandleTrack(int index){
+        Path path=new Path();
+        path.addCircle(getHandle(index).x, getHandle(index).y, HANDLE_RADIUS, Path.Direction.CW);
+        return path;
+    }
+
     protected void onDrawTrack(Canvas canvas) {
         Paint paint = getTrackAppearance().create();
         for (int i = 1; i <= getHandleCount(); i++) {
-            PointF center = getHandle(i);
-            canvas.drawCircle(center.x, center.y, HANDLE_RADIUS, paint);
+            Path handle = getHandleTrack(i);
+            canvas.drawPath(handle, paint);
         }
     }
 
@@ -329,10 +335,9 @@ public abstract class AbstractDrawObject extends AbstractSelectable implements D
 
     @Override
     public PointF local2Parent(@NonNull PointF pt) {
-        Matrix matrix = new Matrix();
-        matrix.setTranslate(position.x, position.y);
-        matrix.preRotate(angle, rotateCenter.x, rotateCenter.y);
+        Matrix matrix = new Matrix(getMatrix());
         float[] dest = new float[2];
+        matrix.preTranslate(getPosition().x, getPosition().y);
         matrix.mapPoints(dest, new float[]{pt.x, pt.y});
         return new PointF(dest[0], dest[1]);
     }
@@ -362,9 +367,9 @@ public abstract class AbstractDrawObject extends AbstractSelectable implements D
 
     @Override
     public PointF parent2Local(@NonNull PointF pt) {
-        Matrix matrix = new Matrix();
-        matrix.setRotate(-angle, rotateCenter.x, rotateCenter.y);
-        matrix.preTranslate(-position.x, -position.y);
+        Matrix matrix = new Matrix(getMatrix());
+        matrix.preTranslate(getPosition().x, getPosition().y);
+        matrix.invert(matrix);
         float[] dest = new float[2];
         matrix.mapPoints(dest, new float[]{pt.x, pt.y});
         return new PointF(dest[0], dest[1]);
@@ -455,21 +460,22 @@ public abstract class AbstractDrawObject extends AbstractSelectable implements D
                 new PointF(rect.left, rect.bottom)};
         return world2Local(pts);
     }
-
     @Override
-    public int hitTest(@NonNull PointF pt) {
-        for (int i = 1; i <= getHandleCount(); i++) {
-            PointF handlePos = getHandle(i);
-            RectF rect = new RectF(handlePos.x - TOUCH_TOLERANT_RADIUS,
-                    handlePos.y - TOUCH_TOLERANT_RADIUS,
-                    handlePos.x + TOUCH_TOLERANT_RADIUS,
-                    handlePos.y + TOUCH_TOLERANT_RADIUS);
-            if (rect.contains(pt.x, pt.y)) {
-                return i;
+    public int hitTest(PointF pt) {
+        if(!isVisible() && !isSelectable()){
+            return 0;
+        }
+        if(isSelected() && isShowTrack()) {
+            Region region = new Region();
+            for (int i = 1; i <= getHandleCount(); i++) {
+                Path handlePath = getHandleTrack(i);
+                region.setPath(handlePath, null);
+                if (region.contains((int) pt.x, (int) pt.y))
+                    return i;
             }
         }
-        if (getBounds().contains(pt.x, pt.y)) return 0;
-        return -1;
+        if(getRegion().contains((int)pt.x, (int)pt.y)) return getHandleCount() + 1;
+        return 0;
     }
 
     @Override

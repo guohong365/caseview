@@ -31,7 +31,8 @@ public class MainActivity extends ActivityBase implements View.OnClickListener{
     private static final int REQUEST_PERMISSION = 0;
     private static String[] neededPermissions=new String[]{
             permission.READ_EXTERNAL_STORAGE,
-            permission.WRITE_EXTERNAL_STORAGE
+            permission.WRITE_EXTERNAL_STORAGE,
+            permission.CAMERA
     };
     void startActionActivity(Class<?> clazz){
         Intent intent=new Intent();
@@ -57,13 +58,13 @@ public class MainActivity extends ActivityBase implements View.OnClickListener{
         imageView.setOnClickListener(this);
         imageView = findViewById(R.id.action_gallery);
         imageView.setOnClickListener(this);
-        final Button button = (Button) findViewById(R.id.button_test);
+        Button button = (Button) findViewById(R.id.button_test);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 List<ImageItem> items= EntityUtils.getSession().getImageItemDao().queryBuilder().limit(2).build().list();
                 Intent intent=new Intent();
-                intent.setClass(button.getContext(), CompareActivity.class);
+                intent.setClass(getBaseContext(), CompareActivity.class);
                 CompareParams params=new CompareParams(
                         Action.COMPARE_SPLIT,
                         null,
@@ -72,6 +73,16 @@ public class MainActivity extends ActivityBase implements View.OnClickListener{
                 startActivityForResult(intent, COMPARE_SPLIT.getCode());
             }
         });
+        button =findView(R.id.m_action_take_photo);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(getBaseContext(), CameraActivity.class);
+                startActivity(intent);
+            }
+        });
+
         checkAndRequestPermission();
     }
     void checkAndRequestPermission(){

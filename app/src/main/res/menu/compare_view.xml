@@ -7,4 +7,7 @@
     <item android:id="@+id/m_action_replace_photo"
         android:title="@string/action_replace_photo"
         android:icon="@drawable/ic_replace_24dp"/>
+    <item
+        android:id="@+id/m_action_edit_photo"
+        android:title="@string/action_edit_photo" />
 </menu>

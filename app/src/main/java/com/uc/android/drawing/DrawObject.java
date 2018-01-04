@@ -3,13 +3,15 @@ package com.uc.android.drawing;
 import android.graphics.Path;
 import android.graphics.PointF;
 import android.graphics.RectF;
+import android.graphics.Region;
 import android.support.annotation.NonNull;
 import android.util.SizeF;
 import android.view.MotionEvent;
 
 import com.uc.android.Selectable;
+import com.uc.android.SelectedObserved;
 
-public interface DrawObject extends Selectable, Drawable, Movable, Scalable, Rotatable{
+public interface DrawObject extends Selectable, Drawable, Movable, Scalable, Rotatable, SelectedObserved{
     PointF LOCAL_ORIGINAL=new PointF(0,0);
     int TOUCH_TOLERANT_RADIUS= 10;
     int PROPERTY_POSITION = 1;
@@ -23,6 +25,7 @@ public interface DrawObject extends Selectable, Drawable, Movable, Scalable, Rot
     PointF getRotateCenter();
     void setRotateCenter(@NonNull PointF rotateCenter);
     RectF getBounds();
+    Region getRegion();
     PointF getCenter();
     Path getClip();
     int getHandleCount();
@@ -86,7 +89,8 @@ public interface DrawObject extends Selectable, Drawable, Movable, Scalable, Rot
     PointF[] world2Local(@NonNull RectF rect);
 
     //action
-    int hitTest(@NonNull PointF pt);
+    int hitTest(PointF pt);
+
     int moveHandleTo(int handle, PointF pt);
 
     interface OnPropertyChangingListener{

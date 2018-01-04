@@ -47,22 +47,22 @@ public class SplitCompareSurfaceView extends CompareView {
         rect.setBackgroundAppearance(new FillAppearanceImpl(Color.CYAN, 0.5f));
         rect.setShowBorder(true);
         rect.rotate(30);
-        container[0].add(rect);
+        containers[0].add(rect);
         ImageObjectImpl imageObject=new ImageObjectImpl(new PointF(700,300), new SizeF(300,400), getImages()[0]);
         imageObject.setShowBorder(false);
         //imageObject.rotate(-30);
-        container[0].add(imageObject);
+        containers[0].add(imageObject);
         imageObject=new ImageObjectImpl(new PointF(1300,300), new SizeF(300,400), getImages()[0]);
         imageObject.rotate(-30);
         imageObject.scale(0.5f, 0.5f);
         imageObject.setShowBorder(true);
         imageObject.setBorderAppearance(new LineAppearanceImpl(Color.YELLOW, 1, 5));
-        container[0].add(imageObject);
+        containers[0].add(imageObject);
     }
 
     @Override
     protected void onDrawUI(Canvas canvas) {
-        container[0].draw(canvas);
-        container[1].draw(canvas);
+        containers[0].draw(canvas);
+        containers[1].draw(canvas);
     }
 }

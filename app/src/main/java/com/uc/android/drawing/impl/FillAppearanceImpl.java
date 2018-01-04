@@ -23,6 +23,7 @@ public class FillAppearanceImpl extends BasicAppearance implements FillAppearanc
     @Override
     protected void onCreatePaint(Paint paint) {
         super.onCreatePaint(paint);
+        paint.setStyle(Paint.Style.FILL);
     }
 
     public FillAppearanceImpl(){
