@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.uc.android.Selectable;
 import com.uc.android.adapter.RecyclerViewAdapterBase;
 import com.uc.caseview.R;
@@ -13,8 +14,6 @@ import com.uc.caseview.adapter.holder.CaseListViewHolder;
 import com.uc.caseview.adapter.holder.CaseListViewViewHolderFactory;
 import com.uc.caseview.entity.CaseItem;
 import com.uc.caseview.entity.EntityUtils;
-import com.uc.caseview.utils.GlideRequest;
-import com.uc.caseview.utils.GlideRequests;
 import com.uc.caseview.utils.GlobalHolder;
 import com.uc.caseview.utils.LogUtils;
 
@@ -23,7 +22,6 @@ import java.util.List;
 
 public class CaseListAdapter extends RecyclerViewAdapterBase<CaseListViewHolder> {
     private int current;
-    private final GlideRequest<Drawable> requestBuilder;
     public void setCurrent(int current) {
         this.current = current;
     }
@@ -32,9 +30,8 @@ public class CaseListAdapter extends RecyclerViewAdapterBase<CaseListViewHolder>
         return current;
     }
 
-    public CaseListAdapter(@NonNull Context context, @NonNull List<CaseItem> caseList, @NonNull GlideRequests glideRequests) {
+    public CaseListAdapter(@NonNull Context context, @NonNull List<CaseItem> caseList) {
         super(context, new ArrayList<Selectable>(caseList), new CaseListViewViewHolderFactory(context));
-        this.requestBuilder = glideRequests.asDrawable().fitCenter();
     }
 
     @Override
@@ -49,10 +46,10 @@ public class CaseListAdapter extends RecyclerViewAdapterBase<CaseListViewHolder>
                 String.format(context.getResources().getString(R.string.format_image_count),
                         caseItem.getTitle(), caseItem.getImageCount()));
         holder.caseDescription.setText(caseItem.getComment());
-        requestBuilder
-                .clone()
-                .apply(GlobalHolder.getRequestOptions())
+        Glide.with(context)
                 .load(caseItem.getPreviewImage())
+                .placeholder(R.drawable.main_action_gallery_48dp)
+                .error(R.drawable.main_action_gallery_48dp)
                 .into(holder.previewImage);
     }
 

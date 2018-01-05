@@ -1,6 +1,5 @@
 package com.uc.caseview.utils;
 
-import com.bumptech.glide.request.RequestOptions;
 import com.uc.caseview.R;
 
 /**
@@ -15,17 +14,4 @@ public class GlobalHolder {
     public static boolean dynanicColumn;
     public static boolean debug;
     public static int gridColumns;
-    private static RequestOptions requestOptions;
-
-    public static RequestOptions getRequestOptions(){
-        synchronized (GlobalHolder.class){
-            if(requestOptions==null){
-                requestOptions=new RequestOptions()
-                        .fallback(R.drawable.main_action_gallery_48dp)
-                        .error(R.drawable.main_action_gallery_48dp);
-
-            }
-        }
-        return requestOptions;
-    }
 }

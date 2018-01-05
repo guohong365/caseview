@@ -7,14 +7,13 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.util.Log;
 
+import com.bumptech.glide.Glide;
 import com.uc.android.Selectable;
 import com.uc.android.adapter.RecyclerViewAdapterBase;
 import com.uc.caseview.adapter.holder.ImageItemViewHolder;
 import com.uc.caseview.adapter.holder.ImageItemViewViewHolderFactory;
 import com.uc.caseview.entity.ImageItem;
 import com.uc.caseview.utils.FileUtils;
-import com.uc.caseview.utils.GlideRequest;
-import com.uc.caseview.utils.GlideRequests;
 import com.uc.caseview.utils.GlobalHolder;
 
 import java.io.File;
@@ -22,12 +21,9 @@ import java.io.IOException;
 import java.util.List;
 
 public class ImageItemAdapter extends RecyclerViewAdapterBase<ImageItemViewHolder> {
-    private final GlideRequest<Drawable> glideRequest;
     public ImageItemAdapter(Context context, List<Selectable> items,
-                            ImageItemViewViewHolderFactory viewHolderFactory,
-                            GlideRequests glideRequests) {
+                            ImageItemViewViewHolderFactory viewHolderFactory) {
         super(context, items, viewHolderFactory);
-        this.glideRequest = glideRequests.asDrawable().apply(GlobalHolder.getRequestOptions());
     }
 
     @Override
@@ -48,8 +44,7 @@ public class ImageItemAdapter extends RecyclerViewAdapterBase<ImageItemViewHolde
                 Log.w(TAG, "load bitmap failed.");
             }
         }
-        glideRequest
-                .clone()
+        Glide.with(context)
                 .load(Uri.fromFile(file))
                 .into(holder.imageView);
     }

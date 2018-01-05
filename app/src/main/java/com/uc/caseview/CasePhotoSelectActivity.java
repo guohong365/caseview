@@ -9,18 +9,15 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.uc.android.Selectable;
-import com.uc.android.view.OnItemClickListener;
 import com.uc.caseview.adapter.ImageItemAdapter;
 import com.uc.caseview.adapter.holder.ImageItemViewViewHolderFactory;
 import com.uc.caseview.entity.EntityUtils;
 import com.uc.caseview.entity.ImageItem;
 import com.uc.caseview.entity.RequestParams;
-import com.uc.caseview.utils.GlideApp;
 import com.uc.caseview.utils.LogUtils;
 
 import java.util.ArrayList;
@@ -38,7 +35,7 @@ public class CasePhotoSelectActivity extends ActivityBase {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_case_photo_select);
         request=getIntent().getExtras().getParcelable(REQUEST_KEY);
-        TextView textView=(TextView)findViewById(R.id.t_message);
+        TextView textView= findViewById(R.id.t_message);
         if(request.getMessage()==null){
             textView.setVisibility(View.GONE);
         }
@@ -57,16 +54,13 @@ public class CasePhotoSelectActivity extends ActivityBase {
             }
         }
         CheckBox checkBox=findView(R.id.ctrl_checkbox_select_all);
-        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                for(Selectable item: imageAdapter.getItems()){
-                    item.setSelected(isChecked);
-                }
-                imageAdapter.notifyDataSetChanged();
+        checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            for(Selectable item: imageAdapter.getItems()){
+                item.setSelected(isChecked);
             }
+            imageAdapter.notifyDataSetChanged();
         });
-        final RecyclerView recyclerView=(RecyclerView) findViewById(R.id.ctrl_recycler_view);
+        final RecyclerView recyclerView= findViewById(R.id.ctrl_recycler_view);
         List<Selectable> list=new ArrayList<>();
         list.addAll(imageItems);
         int orient=getRequestedOrientation();
@@ -74,31 +68,27 @@ public class CasePhotoSelectActivity extends ActivityBase {
         recyclerView.setLayoutManager(new GridLayoutManager(this, columns, LinearLayoutManager.VERTICAL, false));
         imageAdapter=new ImageItemAdapter(
                 this,list,
-                new ImageItemViewViewHolderFactory(this, columns),
-                GlideApp.with(this));
+                new ImageItemViewViewHolderFactory(this, columns));
         recyclerView.setAdapter(imageAdapter);
         imageAdapter.setSelectable(true);
-        imageAdapter.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onClicked(View view, Object tag, int position) {
-                Selectable item=imageAdapter.getItem(position);
-                item.setSelected(!item.isSelected());
-                imageAdapter.notifyItemChanged(position);
-                int count= imageAdapter.getSelectedCount();
-                Log.v(TAG, "selected item count=[" + count + "]");
-                if(request.getRequestCount()!=null && request.getRequestCount() > 0){
-                    btnOk.setEnabled(count==request.getRequestCount());
-                } else {
-                    btnOk.setEnabled(true);
-                }
+        imageAdapter.setOnItemClickListener((view, tag, position) -> {
+            Selectable item=imageAdapter.getItem(position);
+            item.setSelected(!item.isSelected());
+            imageAdapter.notifyItemChanged(position);
+            int count= imageAdapter.getSelectedCount();
+            Log.v(TAG, "selected item count=[" + count + "]");
+            if(request.getRequestCount()!=null && request.getRequestCount() > 0){
+                btnOk.setEnabled(count==request.getRequestCount());
+            } else {
+                btnOk.setEnabled(true);
             }
         });
-        btnOk=(ImageView)findViewById(R.id.m_action_ok);
+        btnOk= findViewById(R.id.m_action_ok);
         if(request.getRequestCount()!=null && request.getRequestCount() >0){
             btnOk.setEnabled(false);
         }
         btnOk.setOnClickListener(commandButtonClicked);
-        ImageView imageView=(ImageView)findViewById(R.id.m_action_cancel);
+        ImageView imageView= findViewById(R.id.m_action_cancel);
         imageView.setOnClickListener(commandButtonClicked);
     }
     View.OnClickListener commandButtonClicked=new View.OnClickListener() {

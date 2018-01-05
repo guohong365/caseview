@@ -168,6 +168,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import com.uc.android.util.CameraPerformanceTracker;
+import com.uc.caseview.R;
+
 public class CameraActivity extends QuickActivity
         implements AppController, CameraAgent.CameraOpenCallback,
         ShareActionProvider.OnShareTargetSelectedListener {
@@ -276,13 +279,8 @@ public class CameraActivity extends QuickActivity
     private final int BASE_SYS_UI_VISIBILITY =
             View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
             | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
-    private final Runnable mLightsOutRunnable = new Runnable() {
-        @Override
-        public void run() {
-            getWindow().getDecorView().setSystemUiVisibility(
-                    BASE_SYS_UI_VISIBILITY | View.SYSTEM_UI_FLAG_LOW_PROFILE);
-        }
-    };
+    private final Runnable mLightsOutRunnable = () -> getWindow().getDecorView().setSystemUiVisibility(
+            BASE_SYS_UI_VISIBILITY | View.SYSTEM_UI_FLAG_LOW_PROFILE);
     private MemoryManager mMemoryManager;
     private MotionManager mMotionManager;
     private final Profiler mProfiler = Profilers.instance().guard();
@@ -406,15 +404,10 @@ public class CameraActivity extends QuickActivity
                             fileAgeFromAdapterAtIndex(currentDataId));
                     // If applicable, show release information before this item
                     // is shared.
-                    if (ReleaseHelper.shouldShowReleaseInfoDialogOnShare(data)) {
+                    if (ReleaseHelper.shouldShowReleaseInfoDialogOnShare(data))
                         ReleaseHelper.showReleaseInfoDialog(CameraActivity.this,
-                                new Callback<Void>() {
-                                    @Override
-                                    public void onCallback(Void result) {
-                                        share(data);
-                                    }
-                                });
-                    } else {
+                                result -> share(data));
+                    else {
                         share(data);
                     }
                 }
@@ -565,7 +558,7 @@ public class CameraActivity extends QuickActivity
     private static class MainHandler extends Handler {
         final WeakReference<CameraActivity> mActivity;
 
-        public MainHandler(CameraActivity activity, Looper looper) {
+        MainHandler(CameraActivity activity, Looper looper) {
             super(looper);
             mActivity = new WeakReference<CameraActivity>(activity);
         }
@@ -1918,12 +1911,7 @@ public class CameraActivity extends QuickActivity
             if (!mSecureCamera) {
                 mFilmstripController.setDataAdapter(mDataAdapter);
                 if (!isCaptureIntent()) {
-                    mDataAdapter.requestLoad(new Callback<Void>() {
-                        @Override
-                        public void onCallback(Void result) {
-                            fillTemporarySessions();
-                        }
-                    });
+                    mDataAdapter.requestLoad(result -> fillTemporarySessions());
                 }
             } else {
                 // Put a lock placeholder as the last image by setting its date to
@@ -2055,12 +2043,7 @@ public class CameraActivity extends QuickActivity
                 // If it's secure camera, requestLoad() should not be called
                 // as it will load all the data.
                 if (!mFilmstripVisible) {
-                    mDataAdapter.requestLoad(new Callback<Void>() {
-                        @Override
-                        public void onCallback(Void result) {
-                            fillTemporarySessions();
-                        }
-                    });
+                    mDataAdapter.requestLoad(result -> fillTemporarySessions());
                 } else {
                     mDataAdapter.requestLoadNewPhotos();
                 }
@@ -2687,16 +2670,13 @@ public class CameraActivity extends QuickActivity
             mUndoDeletionBar.setClickable(true);
             // When there is user interaction going on with the undo button, we
             // do not want to hide the undo bar.
-            button.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View v, MotionEvent event) {
-                    if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
-                        mIsUndoingDeletion = true;
-                    } else if (event.getActionMasked() == MotionEvent.ACTION_UP) {
-                        mIsUndoingDeletion = false;
-                    }
-                    return false;
+            button.setOnTouchListener((v1, event) -> {
+                if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
+                    mIsUndoingDeletion = true;
+                } else if (event.getActionMasked() == MotionEvent.ACTION_UP) {
+                    mIsUndoingDeletion = false;
                 }
+                return false;
             });
         }
         mUndoDeletionBar.setAlpha(0f);

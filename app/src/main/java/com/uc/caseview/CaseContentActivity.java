@@ -12,9 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.uc.android.adapter.GridLayoutManagerFactory;
-import com.uc.android.model.DataGroup;
 import com.uc.android.util.ImageUtils;
-import com.uc.android.view.OnGroupedItemClickListener;
 import com.uc.caseview.adapter.ImageGroupListViewAdapter;
 import com.uc.caseview.adapter.holder.ImageGroupViewViewHolderFactory;
 import com.uc.caseview.adapter.holder.ImageItemViewViewHolderFactory;
@@ -24,7 +22,6 @@ import com.uc.caseview.entity.EntityUtils;
 import com.uc.caseview.entity.ImageGroupItem;
 import com.uc.caseview.entity.ImageItem;
 import com.uc.caseview.entity.RequestParams;
-import com.uc.caseview.utils.GlideApp;
 import com.uc.caseview.utils.LogUtils;
 import com.uc.caseview.view.Action;
 
@@ -43,26 +40,23 @@ public class CaseContentActivity extends ActivityBase {
    // private RequestParams request;
     private ImageGroupListViewAdapter groupAdapter;
     CaseItem caseItem;
-    private OnClickListener commandButtonClicked = new OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            switch (v.getId()){
-                case R.id.m_action_take_photo:
-                    startTakePhoto();
-                    break;
-                case R.id.m_action_compare_split:
-                    doRequestPhotos(COMPARE_SPLIT, 2, -1, R.string.message_request_to_compared);
-                    break;
-                case R.id.m_action_compare_stackup:
-                    doRequestPhotos(Action.COMPARE_STACK_UP, 2, -1, R.string.message_request_to_compared);
-                    break;
-                case R.id.m_action_delete_photo:
-                    doRequestPhotos(Action.DELETE_PHOTOS, -1, -1, R.string.message_request_to_deleted);
-                    break;
-                case R.id.m_action_export_case_photo:
-                    doRequestPhotos(Action.EXPORT_PHOTOS, -1, -1, R.string.message_request_to_exported);
-                    break;
-            }
+    private OnClickListener commandButtonClicked = v -> {
+        switch (v.getId()){
+            case R.id.m_action_take_photo:
+                startTakePhoto();
+                break;
+            case R.id.m_action_compare_split:
+                doRequestPhotos(COMPARE_SPLIT, 2, -1, R.string.message_request_to_compared);
+                break;
+            case R.id.m_action_compare_stackup:
+                doRequestPhotos(Action.COMPARE_STACK_UP, 2, -1, R.string.message_request_to_compared);
+                break;
+            case R.id.m_action_delete_photo:
+                doRequestPhotos(Action.DELETE_PHOTOS, -1, -1, R.string.message_request_to_deleted);
+                break;
+            case R.id.m_action_export_case_photo:
+                doRequestPhotos(Action.EXPORT_PHOTOS, -1, -1, R.string.message_request_to_exported);
+                break;
         }
     };
     void setupCommandButtons(){
@@ -110,17 +104,13 @@ public class CaseContentActivity extends ActivityBase {
         groupAdapter=new ImageGroupListViewAdapter(
                 this, groupList,
                 new ImageGroupViewViewHolderFactory(this, new GridLayoutManagerFactory(this, columns, LinearLayoutManager.VERTICAL)),
-                new ImageItemViewViewHolderFactory(this,columns),
-                GlideApp.with(this));
+                new ImageItemViewViewHolderFactory(this,columns));
         recyclerView.setAdapter(groupAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        groupAdapter.setOnGroupedItemClickListener(new OnGroupedItemClickListener() {
-            @Override
-            public void onClicked(View groupView, View view, DataGroup group, int groupPosition, Object tag, int position) {
-                Log.v(TAG, "item [" + position + "] clicked in group [" + group.getGroupName() +"]");
-                LogUtils.logItem(TAG, group);
-                LogUtils.logItem(TAG, tag);
-            }
+        groupAdapter.setOnGroupedItemClickListener((groupView, view, group, groupPosition, tag, position) -> {
+            Log.v(TAG, "item [" + position + "] clicked in group [" + group.getGroupName() +"]");
+            LogUtils.logItem(TAG, group);
+            LogUtils.logItem(TAG, tag);
         });
         addProcessor(CHOOSE_PHOTOS.getCode(), this);
     }
@@ -139,6 +129,7 @@ public class CaseContentActivity extends ActivityBase {
     @Override
     protected void onPhotoTaken(File photoFile) {
         ImageItem imageItem= ImageUtils.getPhotoExif(photoFile);
+        assert imageItem != null;
         imageItem.setCategoryId(caseItem.getId());
         LogUtils.logItem(TAG, imageItem);
         groupAdapter.insertImageItem(imageItem);

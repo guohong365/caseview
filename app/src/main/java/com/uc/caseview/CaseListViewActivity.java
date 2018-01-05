@@ -1,6 +1,5 @@
 package com.uc.caseview;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -12,13 +11,10 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.SearchView;
 
-import com.uc.android.view.OnItemClickListener;
-import com.uc.android.view.OnItemLongClickListener;
 import com.uc.caseview.adapter.CaseListAdapter;
 import com.uc.caseview.entity.CaseItem;
 import com.uc.caseview.entity.EntityUtils;
 import com.uc.caseview.entity.RequestParams;
-import com.uc.caseview.utils.GlideApp;
 import com.uc.caseview.utils.LogUtils;
 import com.uc.caseview.view.Action;
 
@@ -30,17 +26,14 @@ public class CaseListViewActivity extends ActivityBase {
     CaseListAdapter mAdapter;
     RequestParams requestParams;
     private void initButtonsListener(){
-        View.OnClickListener commandButtonClicked = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                switch (v.getId()) {
-                    case R.id.m_action_new_case:
-                        onStartCreateNewCase();
-                        break;
-                }
+        View.OnClickListener commandButtonClicked = v -> {
+            switch (v.getId()) {
+                case R.id.m_action_new_case:
+                    onStartCreateNewCase();
+                    break;
             }
         };
-        ImageView imageView = (ImageView) findViewById(R.id.m_action_new_case);
+        ImageView imageView = findViewById(R.id.m_action_new_case);
         imageView.setOnClickListener(commandButtonClicked);
     }
 
@@ -57,30 +50,22 @@ public class CaseListViewActivity extends ActivityBase {
             LogUtils.logItem(TAG, item);
         }
         //设置列表
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.ctrl_recycler_view);
+        RecyclerView recyclerView = findViewById(R.id.ctrl_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mAdapter = new CaseListAdapter(this, caseList, GlideApp.with(this));
+        mAdapter = new CaseListAdapter(this, caseList);
         recyclerView.setAdapter(mAdapter);
         // set GONE for this edition because not implement
-        SearchView searchView = (SearchView) findViewById(R.id.ctrl_search_view);
+        SearchView searchView = findViewById(R.id.ctrl_search_view);
         if (mAdapter.getItemCount() == 0) {
             searchView.setEnabled(false);
         }
         searchView.setVisibility(View.GONE);
         Log.i(TAG, "activity created....");
 
-        mAdapter.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onClicked(View view, Object tag, int position) {
-                onStartCaseDetailActivity(position);
-            }
-        });
-        mAdapter.setOnItemLongClickListener(new OnItemLongClickListener() {
-            @Override
-            public boolean onLongClicked(View view, Object tag, int position) {
-                mAdapter.setCurrent(position);
-                return false;
-            }
+        mAdapter.setOnItemClickListener((view, tag, position) -> onStartCaseDetailActivity(position));
+        mAdapter.setOnItemLongClickListener((view, tag, position) -> {
+            mAdapter.setCurrent(position);
+            return false;
         });
      }
     @Override
@@ -148,12 +133,7 @@ public class CaseListViewActivity extends ActivityBase {
         new AlertDialog.Builder(this)
                 .setTitle(getString(R.string.system_dialog_title))
                 .setMessage(getString(R.string.message_if_delete_case))
-                .setPositiveButton(R.string.action_yes, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        doRealDeleteCase(position);
-                    }
-                })
+                .setPositiveButton(R.string.action_yes, (dialog, which) -> doRealDeleteCase(position))
                 .setNegativeButton(R.string.action_cancel, null)
                 .show();
     }

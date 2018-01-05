@@ -14,24 +14,18 @@ import com.bumptech.glide.Glide;
 import com.uc.caseview.R;
 import com.uc.caseview.entity.ImageItem;
 import com.uc.caseview.utils.FileUtils;
-import com.uc.caseview.utils.GlobalHolder;
 
 import java.util.List;
 
-/**
- * Created by guoho on 2017/6/8.
- */
-
 public class MyGridViewAdapter extends BaseAdapter {
-    public List<ImageItem> mImages;
-    private LayoutInflater mInflater;
+    private List<ImageItem> mImages;
     private Context mContext;
     private boolean selectable;
     //private FinalBitmap mImageLoader;
     private int wh;
     public MyGridViewAdapter(@NonNull Context context, @NonNull List<ImageItem> images, int itemWidthInDx){
         this.mImages=images;
-        mInflater=LayoutInflater.from(context);
+        LayoutInflater mInflater = LayoutInflater.from(context);
         this.mContext=context;
         //mImageLoader=FinalBitmap.create(context);
         //mImageLoader.configLoadfailImage(R.drawable.ic_error_image).configLoadingImage(R.drawable.ic_loading).configBitmapLoadThreadSize(5);
@@ -76,7 +70,6 @@ public class MyGridViewAdapter extends BaseAdapter {
         String fileName= FileUtils.getImagePathName(mContext, mImages.get(position).getName());
         Glide.with(mContext)
                 .load(fileName)
-                .apply(GlobalHolder.getRequestOptions())
                 .thumbnail(0.1f)
                 .into(imageView);
         RelativeLayout.LayoutParams layoutParams=new RelativeLayout.LayoutParams(wh,wh);

@@ -15,22 +15,18 @@ import com.uc.caseview.entity.CaseItem;
 import com.uc.caseview.entity.EntityUtils;
 import com.uc.caseview.entity.ImageGroupItem;
 import com.uc.caseview.entity.ImageItem;
-import com.uc.caseview.utils.GlideRequests;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ImageGroupListViewAdapter extends DataGroupAdapter<ImageItemGroupHolder, ImageItemViewHolder> {
-    private final GlideRequests requests;
     private final ImageItemViewViewHolderFactory itemViewHolderFactory;
     public ImageGroupListViewAdapter(Context context, List<ImageGroupItem> imageGroups,
                                      ImageGroupViewViewHolderFactory groupFactory,
-                                     ImageItemViewViewHolderFactory itemViewHolderFactory,
-                                     GlideRequests requests){
+                                     ImageItemViewViewHolderFactory itemViewHolderFactory){
         super(context, new ArrayList<Selectable>(), groupFactory, itemViewHolderFactory);
         items.addAll(imageGroups);
         this.itemViewHolderFactory=itemViewHolderFactory;
-        this.requests=requests;
     }
 
     @Override
@@ -45,7 +41,7 @@ public class ImageGroupListViewAdapter extends DataGroupAdapter<ImageItemGroupHo
 
     @Override
     protected RecyclerViewAdapterBase<ImageItemViewHolder> createItemAdapter(Context context,   List<Selectable> items) {
-        return new ImageItemAdapter(context, items, itemViewHolderFactory, requests);
+        return new ImageItemAdapter(context, items, itemViewHolderFactory);
     }
     @Override
     public ImageGroupItem findGroupByName(@NonNull String name){

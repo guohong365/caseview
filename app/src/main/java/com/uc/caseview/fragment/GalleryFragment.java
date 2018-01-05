@@ -1,6 +1,7 @@
 package com.uc.caseview.fragment;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,12 +10,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.uc.android.Selectable;
 import com.uc.caseview.R;
 import com.uc.caseview.adapter.ImageItemAdapter;
 import com.uc.caseview.adapter.holder.ImageItemViewViewHolderFactory;
 import com.uc.caseview.entity.RequestParams;
-import com.uc.caseview.utils.GlideApp;
 
 import java.util.ArrayList;
 
@@ -50,16 +49,15 @@ public class GalleryFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view= inflater.inflate(R.layout.item_recycler_view, container, false);
 
-        RecyclerView recyclerView=(RecyclerView) view.findViewById(R.id.ctrl_recycler_view);
+        RecyclerView recyclerView= view.findViewById(R.id.ctrl_recycler_view);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1, LinearLayoutManager.HORIZONTAL, false));
         ImageItemAdapter adapter=new ImageItemAdapter(getActivity(),
-                new ArrayList<Selectable>(request.getImageItems()),
-                new ImageItemViewViewHolderFactory(getContext(), 1),
-                GlideApp.with(getActivity()));
+                new ArrayList<>(request.getImageItems()),
+                new ImageItemViewViewHolderFactory(getContext(), 1));
         GridLayoutManager layoutManager=new GridLayoutManager(getActivity(),1);
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         recyclerView.setHasFixedSize(true);
