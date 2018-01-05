@@ -34,7 +34,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".StartScreenActivity"
+            android:name="com.uc.caseview.StartScreenActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:theme="@style/FullscreenTheme">
             <intent-filter>
@@ -43,19 +43,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
-        <activity android:name=".CaseListViewActivity" />
-        <activity android:name=".SearchActivity" />
-        <activity android:name=".GalleryActivity" />
+        <activity android:name="com.uc.caseview.MainActivity" />
+        <activity android:name="com.uc.caseview.CaseListViewActivity" />
+        <activity android:name="com.uc.caseview.SearchActivity" />
+        <activity android:name="com.uc.caseview.GalleryActivity" />
         <activity
-            android:name=".ImageFullscreenViewActivity"
+            android:name="com.uc.caseview.ImageFullscreenViewActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:theme="@style/FullscreenTheme" />
-        <activity android:name=".CaseContentActivity" />
-        <activity android:name=".NewCaseActivity" />
-        <activity android:name=".DeviceListActivity" />
-        <activity android:name=".CasePhotoSelectActivity" />
-        <activity android:name=".HorizontalGalleryActivity" />
+        <activity android:name="com.uc.caseview.CaseContentActivity" />
+        <activity android:name="com.uc.caseview.NewCaseActivity" />
+        <activity android:name="com.uc.caseview.DeviceListActivity" />
+        <activity android:name="com.uc.caseview.CasePhotoSelectActivity" />
+        <activity android:name="com.uc.caseview.HorizontalGalleryActivity" />
+        <activity android:name="com.uc.caseview.CompareActivity"/>
+        <activity android:name="com.uc.android.camera.PermissionsActivity"/>
 
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -68,15 +70,22 @@
         </provider>
 
         <activity
-            android:name=".CompareActivity"
-            android:screenOrientation="landscape"
-            android:theme="@style/FullscreenTheme" />
+            android:name="com.uc.android.camera.CameraActivity"
+            android:theme="@style/Theme.Camera"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"
+            android:launchMode="singleTask">
+            <meta-data
+                android:name="com.uc.android.keyguard.layout"
+                android:resource="@layout/keyguard_widget" />
+        </activity>
         <activity
-            android:name=".SettingsActivity"
+            android:name="com.uc.caseview.SettingsActivity"
             android:label="@string/title_activity_settings" />
         <activity
-            android:name=".CameraSettingsActivity"
-            android:label="@string/title_activity_camera_settings"></activity>
+            android:name="com.uc.android.camera.settings.CameraSettingsActivity"
+            android:theme="@style/Theme.CameraSettings"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/title_activity_camera_settings"/>
     </application>
 
 </manifest>

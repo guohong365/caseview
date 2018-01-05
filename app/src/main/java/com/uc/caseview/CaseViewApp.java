@@ -1,9 +1,19 @@
 package com.uc.caseview;
 
 import android.app.Application;
+import android.app.NotificationManager;
+import android.content.Context;
+import android.os.Debug;
 import android.os.Environment;
 import android.util.Log;
 
+import com.uc.android.camera.app.CameraApp;
+import com.uc.android.camera.app.FirstRunDetector;
+import com.uc.android.camera.stats.UsageStatistics;
+import com.uc.android.camera.stats.profiler.Profile;
+import com.uc.android.camera.stats.profiler.Profilers;
+import com.uc.android.camera.util.AndroidContext;
+import com.uc.android.camera.util.AndroidServices;
 import com.uc.caseview.utils.FileUtils;
 import com.uc.caseview.utils.GlideCacheUtil;
 import com.uc.caseview.utils.GlobalHolder;
@@ -13,7 +23,7 @@ import java.io.IOException;
 
 import static com.uc.caseview.utils.FileUtils.IMAGES_DIR;
 
-public class CaseViewApp extends Application {
+public class CaseViewApp extends CameraApp {
     public static final String APP_DB = "case_view.db";
     public static String TAG;
     public static CaseViewApp App;
@@ -23,6 +33,8 @@ public class CaseViewApp extends Application {
         GlobalHolder.gridColumns=3;
         TAG=getClass().getSimpleName();
     }
+
+
 
     public String getImagePath() {
         return FileUtils.getImageDir(this);
@@ -59,4 +71,5 @@ public class CaseViewApp extends Application {
         initPath();
         GlideCacheUtil.getInstance().clearImageAllCache(this);
     }
+
 }

@@ -14,10 +14,10 @@
      limitations under the License.
 -->
 
-<com.android.camera.widget.LocationDialogLayout
+<com.uc.android.camera.widget.LocationDialogLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
              android:background="@color/fullscreen_dialog_background_color">
     <include layout="@layout/location_dialog_content"/>
-</com.android.camera.widget.LocationDialogLayout>
+</com.uc.android.camera.widget.LocationDialogLayout>

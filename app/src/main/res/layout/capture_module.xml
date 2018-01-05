@@ -19,7 +19,7 @@
     android:layout_height="match_parent"
     android:layout_gravity="center">
 
-    <com.android.camera.ui.ProgressOverlay
+    <com.uc.android.camera.ui.ProgressOverlay
         android:id="@+id/progress_overlay"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
@@ -33,7 +33,7 @@
         android:background="@android:color/black"
         android:scaleType="fitCenter"/>
 
-    <com.android.camera.ui.CountDownView
+    <com.uc.android.camera.ui.CountDownView
         android:id="@+id/count_down_view"
         android:visibility="invisible"
         android:layout_width="match_parent"
@@ -44,7 +44,7 @@
             android:textSize="160dp"
             android:textColor="@android:color/white"
             android:gravity="center"/>
-    </com.android.camera.ui.CountDownView>
+    </com.uc.android.camera.ui.CountDownView>
 
 </FrameLayout>
 

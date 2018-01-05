@@ -1514,7 +1514,7 @@ public class CameraActivity extends QuickActivity
         }
 
         profile.mark();
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_camera);
         profile.mark("setContentView()");
         // A window background is set in styles.xml for the system to show a
         // drawable background with gray color and camera icon before the

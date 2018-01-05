@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.uc.android.camera.CameraActivity;
 import com.uc.caseview.entity.CompareParams;
 import com.uc.caseview.entity.EntityUtils;
 import com.uc.caseview.entity.ImageItem;

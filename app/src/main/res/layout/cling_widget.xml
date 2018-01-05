@@ -15,7 +15,7 @@
      limitations under the License.
 -->
 
-<com.android.camera.widget.Cling xmlns:android="http://schemas.android.com/apk/res/android"
+<com.uc.android.camera.widget.Cling xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="@dimen/default_cling_width"
     android:layout_height="wrap_content"
     android:paddingLeft="15dp"

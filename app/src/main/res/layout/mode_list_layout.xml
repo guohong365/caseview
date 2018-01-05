@@ -14,7 +14,7 @@
      limitations under the License.
 -->
 
-<com.android.camera.ui.ModeListView
+<com.uc.android.camera.ui.ModeListView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/mode_list_layout"
     android:fillViewport="true"
@@ -38,4 +38,4 @@
         android:contentDescription="@string/mode_settings"
         android:background="@drawable/settings_gear_background"
         android:src="@drawable/ic_settings_normal" />
-</com.android.camera.ui.ModeListView>
+</com.uc.android.camera.ui.ModeListView>

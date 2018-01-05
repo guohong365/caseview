@@ -14,7 +14,7 @@
      limitations under the License.
 -->
 
-<com.android.camera.ui.ModeSelectorItem
+<com.uc.android.camera.ui.ModeSelectorItem
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="@dimen/mode_selector_item_height"
@@ -32,10 +32,10 @@
         android:textSize="@dimen/mode_selector_text_size"
         android:textColor="@color/mode_selector_text_color"
         android:layout_marginLeft="@dimen/mode_selector_icon_block_width" />
-    <com.android.camera.ui.ModeIconView
+    <com.uc.android.camera.ui.ModeIconView
         android:id="@+id/selector_icon"
         android:scaleType="centerInside"
         android:layout_gravity="left"
         android:layout_width="@dimen/mode_selector_icon_block_width"
         android:layout_height="@dimen/mode_selector_icon_block_width" />
-</com.android.camera.ui.ModeSelectorItem>
+</com.uc.android.camera.ui.ModeSelectorItem>
