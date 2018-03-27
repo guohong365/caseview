@@ -37,6 +37,35 @@ public class CaseItem extends AbstractSelectable implements Parcelable {
     @Unique
     private String title;
 
+    public Integer getLevel() {
+        return level;
+    }
+
+    public void setLevel(Integer level) {
+        this.level = level;
+    }
+
+    @NotNull
+    private Integer level;
+
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
+    }
+
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
+    }
+
+    private Double longitude;
+    private Double latitude;
     private String comment;
     @NotNull
     private Long createTime;
@@ -51,7 +80,7 @@ public class CaseItem extends AbstractSelectable implements Parcelable {
 
     @Override
     public CaseItem clone(){
-        return new CaseItem(getId(), getUser(), getTitle(), getComment(), getCreateTime());
+        return new CaseItem(getId(), getUser(), getTitle(),getLevel(),null,null, getComment(), getCreateTime());
     }
 
     @Override
@@ -59,6 +88,7 @@ public class CaseItem extends AbstractSelectable implements Parcelable {
         return "----------" + getClass().getSimpleName() + "----------\n" +
                 super.toString() +
                 "title=[" + title + "]\n" +
+                "level=[" + level + "]\n" +
                 "user=[" + user + "]\n" +
                 "preview image=[" + (id == null ? "null" : getPreviewImage()) + "]\n" +
                 "imageCount=[" + (id == null ? "null" : getImageCount()) + "]\n" +
@@ -186,12 +216,15 @@ public class CaseItem extends AbstractSelectable implements Parcelable {
     }
 
 
-    @Generated(hash = 886960644)
-    public CaseItem(Long id, @NotNull String user, @NotNull String title, String comment,
-            @NotNull Long createTime) {
+    @Generated(hash = 1523017360)
+    public CaseItem(Long id, @NotNull String user, @NotNull String title, @NotNull Integer level,
+            Double longitude, Double latitude, String comment, @NotNull Long createTime) {
         this.id = id;
         this.user = user;
         this.title = title;
+        this.level = level;
+        this.longitude = longitude;
+        this.latitude = latitude;
         this.comment = comment;
         this.createTime = createTime;
     }
@@ -214,6 +247,9 @@ public class CaseItem extends AbstractSelectable implements Parcelable {
         dest.writeValue(this.createTime);
         dest.writeString(this.previewImage);
         dest.writeValue(this.imageCount);
+        dest.writeValue(this.level);
+        dest.writeValue(this.longitude);
+        dest.writeValue(this.latitude);
         dest.writeByte(this.dirty ? (byte) 1 : (byte) 0);
         dest.writeString(this.createDate);
         dest.writeByte(this.selected ? (byte) 1 : (byte) 0);
@@ -228,6 +264,9 @@ public class CaseItem extends AbstractSelectable implements Parcelable {
         this.createTime = (Long) in.readValue(Long.class.getClassLoader());
         this.previewImage = in.readString();
         this.imageCount = (Long) in.readValue(Long.class.getClassLoader());
+        this.level=(Integer)in.readValue(Integer.class.getClassLoader());
+        this.longitude=(Double)in.readValue(Double.class.getClassLoader());
+        this.latitude=(Double)in.readValue(Double.class.getClassLoader());
         this.dirty = in.readByte() != 0;
         this.createDate = in.readString();
         this.selected = in.readByte() != 0;

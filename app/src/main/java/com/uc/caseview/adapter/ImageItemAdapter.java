@@ -46,6 +46,7 @@ public class ImageItemAdapter extends RecyclerViewAdapterBase<ImageItemViewHolde
         }
         Glide.with(context)
                 .load(Uri.fromFile(file))
+                .override(256,256)
                 .into(holder.imageView);
     }
 }

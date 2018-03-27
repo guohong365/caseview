@@ -168,7 +168,7 @@ public class CaseContentActivity extends ActivityBase {
         Log.i(TAG, "to start comparing in split mode.");
         LogUtils.logItems(TAG,images);
         Intent intent=new Intent();
-        intent.setClass(this, CompareActivity.class);
+        intent.setClass(this, Compare2Activity.class);
         CompareParams params=new CompareParams(
                 Action.COMPARE_SPLIT,
                 caseItem.getId(),

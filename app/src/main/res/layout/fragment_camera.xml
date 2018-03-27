@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
-        <com.uc.android.view.camera.GridLines
+        <com.uc.android.camera.ui.GridLines
             android:id="@+id/camera_grid_line"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -309,6 +309,6 @@
             android:background="@android:color/transparent"
             android:contentDescription="@string/dummy_content"
             android:scaleType="fitCenter"
-            android:src="@drawable/action_take_photo_48dp" />
+            android:src="@drawable/ic_action_take_photo" />
     </FrameLayout>
 </LinearLayout>

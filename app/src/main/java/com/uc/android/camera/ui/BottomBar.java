@@ -104,7 +104,7 @@ public class BottomBar extends FrameLayout {
         for (int i = 0; i < len; i++) {
             int drawableId = ar.getResourceId(i, -1);
             mShutterButtonBackgroundConstantStates[i] =
-                    context.getResources().getDrawable(drawableId).getConstantState();
+                    context.getResources().getDrawable(drawableId, null).getConstantState();
         }
         ar.recycle();
     }
@@ -166,17 +166,18 @@ public class BottomBar extends FrameLayout {
 
     @Override
     public void onFinishInflate() {
+        super.onFinishInflate();
         mCaptureLayout =
-                (FrameLayout) findViewById(R.id.bottombar_capture);
+                findViewById(R.id.bottombar_capture);
         mCancelLayout =
-                (FrameLayout) findViewById(R.id.bottombar_cancel);
+                findViewById(R.id.bottombar_cancel);
         mCancelLayout.setVisibility(View.GONE);
 
         mIntentReviewLayout =
-                (TopRightWeightedLayout) findViewById(R.id.bottombar_intent_review);
+                findViewById(R.id.bottombar_intent_review);
 
         mShutterButton =
-                (ShutterButton) findViewById(R.id.shutter_button);
+                findViewById(R.id.shutter_button);
         mShutterButton.setOnTouchListener(new OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -196,7 +197,7 @@ public class BottomBar extends FrameLayout {
         });
 
         mCancelButton =
-                (ImageButton) findViewById(R.id.shutter_cancel_button);
+                findViewById(R.id.shutter_cancel_button);
         mCancelButton.setOnTouchListener(new OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -490,7 +491,7 @@ public class BottomBar extends FrameLayout {
      * drawable which is guaranteed to not share states with other drawables.
      */
     public void setShutterButtonIcon(int resId) {
-        Drawable iconDrawable = getResources().getDrawable(resId);
+        Drawable iconDrawable = getResources().getDrawable(resId, null);
         if (iconDrawable != null) {
             iconDrawable = iconDrawable.mutate();
         }
@@ -508,7 +509,7 @@ public class BottomBar extends FrameLayout {
 
         TransitionDrawable transitionDrawable = crossfadeDrawable(
                 mShutterButton.getDrawable(),
-                getResources().getDrawable(resId));
+                getResources().getDrawable(resId, null));
         mShutterButton.setImageDrawable(transitionDrawable);
         transitionDrawable.startTransition(CIRCLE_ANIM_DURATION_MS);
     }
@@ -524,7 +525,7 @@ public class BottomBar extends FrameLayout {
 
         TransitionDrawable transitionDrawable = crossfadeDrawable(
                 mShutterButton.getDrawable(),
-                getResources().getDrawable(resId));
+                getResources().getDrawable(resId, null));
         mShutterButton.setImageDrawable(transitionDrawable);
         transitionDrawable.startTransition(CIRCLE_ANIM_DURATION_MS);
     }

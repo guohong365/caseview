@@ -16,12 +16,14 @@ public class CaseListViewHolder extends RecyclerViewHolderBase {
     public final ImageView previewImage;
     public final TextView caseDescription;
     public final TextView caseName;
+    public final ImageView caseLevel;
 
     public CaseListViewHolder(final View itemView) {
         super(itemView);
         previewImage = (ImageView) itemView.findViewById(R.id.ctrl_image_view_case_preview);
         caseDescription = (TextView) itemView.findViewById(R.id.t_case_descript);
         caseName=(TextView)itemView.findViewById(R.id.t_case_name);
+        caseLevel=(ImageView) itemView.findViewById(R.id.ctrl_case_level);
         itemView.setLongClickable(true);
         itemView.setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
             @Override

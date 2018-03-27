@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2007 The Android Open Source Project
+<?xml version="1.0" encoding="utf-8"?><!-- Copyright (C) 2007 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -553,7 +552,7 @@
 
     <!-- Settings screen, Flash mode title -->
     <string name="pref_camera_flashmode_title">Flash mode</string>
-        <!-- flash label [CHAR LIMIT=50] -->
+    <!-- flash label [CHAR LIMIT=50] -->
     <string name="pref_camera_flashmode_label">FLASH MODE</string>
 
     <!-- Settings screen, Flash mode 'auto'. [CHAR LIMIT=12] -->
@@ -965,7 +964,11 @@
     <string name="camera_menu_more_label">MORE OPTIONS</string>
     <!-- settings label [CHAR LIMIT=50] -->
     <string name="camera_menu_settings_label">SETTINGS</string>
-
+    <string name="label_longitude">Longitude:</string>
+    <string name="label_latitude">Latitude:</string>
+    <string name="format_location">%s</string>
+    <string name="hint_location">click location icon above to refresh location</string>
+    <string name="error_get_location">get location failed. Please set GPS on and try again.</string>
     <!--  Tiny Planet -->
     <!-- Button to press for creating a tiny planet image. [CHAR LIMIT=30] -->
     <string name="create_tiny_planet">Create Tiny Planet</string>
@@ -1050,6 +1053,9 @@
     <!-- Accessibility text for grid lines toggle button states [CHAR_LIMIT=NONE] -->
     <string name="grid_lines_off_desc">Grid lines off</string>
     <string name="grid_lines_on_desc">Grid lines on</string>
+    <string name="ruler_style_none">Hide ruler</string>
+    <string name="ruler_style_cm">Show ruler in CM unit</string>
+    <string name="ruler_style_mm">Show ruler in MM unit</string>
 
     <!-- Accessibility text for countdown timer toggle button states [CHAR_LIMIT=NONE] -->
     <string name="countdown_timer_off">Countdown timer is off</string>
@@ -1229,4 +1235,4 @@
 
     <!-- Shown to the user while an image/video is being saved to disk. -->
     <string name="session_saving_image">Saving\u2026</string>
- </resources>
+</resources>

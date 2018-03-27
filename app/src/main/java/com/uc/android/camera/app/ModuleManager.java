@@ -120,16 +120,4 @@ public interface ModuleManager {
      * @return The agent.
      */
     ModuleAgent getModuleAgent(int moduleId);
-
-    /**
-     * Gets the mode that can be switched to from the given mode id through
-     * quick switch.
-     *
-     * @param moduleId index of the mode to switch from
-     * @param settingsManager settings manager for querying last used camera module
-     * @param context the context the activity is running in
-     * @return mode id to quick switch to if index is valid, otherwise returns
-     *         the given mode id itself
-     */
-    int getQuickSwitchToModuleId(int moduleId, SettingsManager settingsManager, Context context);
 }

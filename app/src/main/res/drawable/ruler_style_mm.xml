@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:constantSize="true">
+    <item android:state_enabled="false">
+        <layer-list>
+            <item
+                android:width="32dp"
+                android:height="32dp"
+                android:gravity="center"
+                android:drawable="@drawable/ic_ruler_style_mm_disabled"/>
+        </layer-list>
+    </item>
+    <item android:state_pressed="true">
+        <layer-list>
+            <item android:drawable="@drawable/button_background_pressed_dark" />
+            <item
+                android:width="32dp"
+                android:height="32dp"
+                android:gravity="center"
+                android:drawable="@drawable/ic_ruler_style_mm_normal" />
+        </layer-list>
+    </item>
+    <item>
+        <layer-list>
+            <item  android:drawable="@drawable/ic_ruler_style_mm_normal"/>
+        </layer-list>
+    </item>
+</selector>

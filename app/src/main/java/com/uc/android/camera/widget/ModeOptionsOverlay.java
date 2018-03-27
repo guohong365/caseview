@@ -101,6 +101,7 @@ public class ModeOptionsOverlay extends FrameLayout
 
     @Override
     public void onFinishInflate() {
+        super.onFinishInflate();
         mModeOptions = (ModeOptions) findViewById(R.id.mode_options);
         mModeOptions.setClickable(true);
         mModeOptions.setOnClickListener(new OnClickListener() {

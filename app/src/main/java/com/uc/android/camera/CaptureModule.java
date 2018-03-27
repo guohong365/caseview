@@ -85,11 +85,10 @@ import com.uc.android.camera.ui.focus.FocusSound;
 import com.uc.android.camera.util.AndroidServices;
 import com.uc.android.camera.util.ApiHelper;
 import com.uc.android.camera.util.CameraUtil;
-import com.uc.android.camera.util.GcamHelper;
 import com.uc.android.camera.util.Size;
 import com.uc.caseview.R;
 import com.uc.android.ex.camera2.portability.CameraAgent.CameraProxy;
-import com.google.common.logging.eventprotos;
+import com.uc.android.util.eventprotos;
 
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
@@ -398,7 +397,7 @@ public class CaptureModule extends CameraModule implements
     }
 
     @Override
-    public void init(CameraActivity activity, boolean isSecureCamera, boolean isCaptureIntent) {
+    public void init(CameraActivity activity, boolean isCaptureIntent) {
         Profile guard = mProfiler.create("CaptureModule.init").start();
         Log.d(TAG, "init UseAutotransformUiLayout = " + USE_AUTOTRANSFORM_UI_LAYOUT);
         HandlerThread thread = new HandlerThread("CaptureModule.mCameraHandler");
@@ -805,6 +804,7 @@ public class CaptureModule extends CameraModule implements
         HardwareSpec hardwareSpec = getHardwareSpec();
         BottomBarUISpec bottomBarSpec = new BottomBarUISpec();
         bottomBarSpec.enableGridLines = true;
+        bottomBarSpec.enableRulerStyle=true;
         bottomBarSpec.enableCamera = true;
         bottomBarSpec.cameraCallback = getCameraCallback();
         bottomBarSpec.enableHdr =
@@ -1091,14 +1091,7 @@ public class CaptureModule extends CameraModule implements
                     if (mPaused) {
                         return;
                     }
-
-                    // Only reload the camera if we are toggling HDR+.
-                    if (GcamHelper.hasGcamCapture(mAppController.getCameraFeatureConfig())) {
-                        mHdrPlusEnabled = hdrEnabled == 1;
-                        switchCamera();
-                    } else {
-                        mHdrSceneEnabled = hdrEnabled == 1;
-                    }
+                    mHdrSceneEnabled = hdrEnabled == 1;
                 }
             };
         }

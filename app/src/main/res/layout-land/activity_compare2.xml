@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.uc.caseview.layout.CompareFrame
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/compare_root_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    tools:context=".Compare2Activity">
+
+    <FrameLayout
+        android:id="@+id/first_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include layout="@layout/item_compare" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/second_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include layout="@layout/item_compare" />
+    </FrameLayout>
+</com.uc.caseview.layout.CompareFrame>

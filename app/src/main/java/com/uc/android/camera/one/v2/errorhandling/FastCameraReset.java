@@ -24,7 +24,7 @@ import com.uc.android.camera.one.v2.camera2proxy.CameraCaptureSessionClosedExcep
 import com.uc.android.camera.one.v2.camera2proxy.CameraCaptureSessionProxy;
 import com.uc.android.camera.one.v2.commands.CameraCommandExecutor;
 import com.uc.android.camera.stats.UsageStatistics;
-import com.google.common.logging.eventprotos;
+import com.uc.android.util.eventprotos;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 

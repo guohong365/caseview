@@ -33,22 +33,19 @@ import com.uc.android.camera.widget.ModeOptions;
 import com.uc.caseview.R;
 
 
-/**
- * A  class for generating pre-initialized
- * {@link #android.widget.ImageButton}s.
- */
+
 public class ButtonManager implements SettingsManager.OnSettingChangedListener {
     public static final int BUTTON_FLASH = 0;
     public static final int BUTTON_TORCH = 1;
     public static final int BUTTON_HDR_PLUS_FLASH = 2;
-    public static final int BUTTON_CAMERA = 3;
-    public static final int BUTTON_HDR_PLUS = 4;
-    public static final int BUTTON_HDR = 5;
-    public static final int BUTTON_CANCEL = 6;
-    public static final int BUTTON_DONE = 7;
-    public static final int BUTTON_RETAKE = 8;
-    public static final int BUTTON_REVIEW = 9;
-    public static final int BUTTON_GRID_LINES = 10;
+    public static final int BUTTON_HDR_PLUS = 3;
+    public static final int BUTTON_HDR = 4;
+    public static final int BUTTON_CANCEL = 5;
+    public static final int BUTTON_DONE = 6;
+    public static final int BUTTON_RETAKE = 7;
+    public static final int BUTTON_REVIEW = 8;
+    public static final int BUTTON_GRID_LINES = 9;
+    public static final int BUTTON_RULER_STYLE=10;
     public static final int BUTTON_EXPOSURE_COMPENSATION = 11;
     public static final int BUTTON_COUNTDOWN = 12;
 
@@ -63,10 +60,10 @@ public class ButtonManager implements SettingsManager.OnSettingChangedListener {
     private final SettingsManager mSettingsManager;
 
     /** Bottom bar options toggle buttons. */
-    private MultiToggleImageButton mButtonCamera;
     private MultiToggleImageButton mButtonFlash;
     private MultiToggleImageButton mButtonHdr;
     private MultiToggleImageButton mButtonGridlines;
+    private MultiToggleImageButton mButtonRulerStyle;
     private MultiToggleImageButton mButtonCountdown;
 
     /** Intent UI buttons. */
@@ -150,14 +147,16 @@ public class ButtonManager implements SettingsManager.OnSettingChangedListener {
      * Gets references to all known buttons.
      */
     private void getButtonsReferences(View root) {
-        mButtonCamera
-            = (MultiToggleImageButton) root.findViewById(R.id.camera_toggle_button);
+        mButtonRulerStyle
+            = (MultiToggleImageButton) root.findViewById(R.id.ruler_style_toggle_button);
         mButtonFlash
             = (MultiToggleImageButton) root.findViewById(R.id.flash_toggle_button);
         mButtonHdr
             = (MultiToggleImageButton) root.findViewById(R.id.hdr_plus_toggle_button);
         mButtonGridlines
             = (MultiToggleImageButton) root.findViewById(R.id.grid_lines_toggle_button);
+        mButtonRulerStyle=(MultiToggleImageButton) root.findViewById(R.id.ruler_style_toggle_button);
+
         mButtonCancel
             = (ImageButton) root.findViewById(R.id.cancel_button);
         mButtonDone
@@ -197,10 +196,7 @@ public class ButtonManager implements SettingsManager.OnSettingChangedListener {
             index = mSettingsManager.getIndexOfCurrentValue(mAppController.getModuleScope(),
                                                             Keys.KEY_HDR_PLUS_FLASH_MODE);
             button = getButtonOrError(BUTTON_HDR_PLUS_FLASH);
-        } else if (key.equals(Keys.KEY_CAMERA_ID)) {
-            index = mSettingsManager.getIndexOfCurrentValue(mAppController.getModuleScope(),
-                                                            Keys.KEY_CAMERA_ID);
-            button = getButtonOrError(BUTTON_CAMERA);
+
         } else if (key.equals(Keys.KEY_CAMERA_HDR_PLUS)) {
             index = mSettingsManager.getIndexOfCurrentValue(SettingsManager.SCOPE_GLOBAL,
                                                             Keys.KEY_CAMERA_HDR_PLUS);
@@ -213,6 +209,10 @@ public class ButtonManager implements SettingsManager.OnSettingChangedListener {
             index = mSettingsManager.getIndexOfCurrentValue(SettingsManager.SCOPE_GLOBAL,
                                                             Keys.KEY_CAMERA_GRID_LINES);
             button = getButtonOrError(BUTTON_GRID_LINES);
+        } else if (key.equals(Keys.KEY_CAMERA_RULER_STYLE)) {
+            index = mSettingsManager.getIndexOfCurrentValue(mAppController.getModuleScope(),
+                    Keys.KEY_CAMERA_RULER_STYLE);
+            button = getButtonOrError(BUTTON_RULER_STYLE);
         } else if (key.equals(Keys.KEY_CAMERA_PANO_ORIENTATION)) {
             updatePanoButtons();
         } else if (key.equals(Keys.KEY_EXPOSURE)) {
@@ -260,11 +260,6 @@ public class ButtonManager implements SettingsManager.OnSettingChangedListener {
                     throw new IllegalStateException("Hdr plus torch button could not be found.");
                 }
                 return mButtonFlash;
-            case BUTTON_CAMERA:
-                if (mButtonCamera == null) {
-                    throw new IllegalStateException("Camera button could not be found.");
-                }
-                return mButtonCamera;
             case BUTTON_HDR_PLUS:
                 if (mButtonHdr == null) {
                     throw new IllegalStateException("Hdr plus button could not be found.");
@@ -280,6 +275,11 @@ public class ButtonManager implements SettingsManager.OnSettingChangedListener {
                     throw new IllegalStateException("Grid lines button could not be found.");
                 }
                 return mButtonGridlines;
+            case BUTTON_RULER_STYLE:
+                if (mButtonRulerStyle == null) {
+                    throw new IllegalStateException("ruler style button could not be found.");
+                }
+                return mButtonRulerStyle;
             case BUTTON_COUNTDOWN:
                 if (mButtonCountdown == null) {
                     throw new IllegalStateException("Countdown button could not be found.");
@@ -358,9 +358,6 @@ public class ButtonManager implements SettingsManager.OnSettingChangedListener {
             case BUTTON_HDR_PLUS_FLASH:
                 initializeHdrPlusFlashButton(button, cb, preCb, R.array.camera_flashmode_icons);
                 break;
-            case BUTTON_CAMERA:
-                initializeCameraButton(button, cb, preCb, R.array.camera_id_icons);
-                break;
             case BUTTON_HDR_PLUS:
                 initializeHdrPlusButton(button, cb, preCb, R.array.pref_camera_hdr_plus_icons);
                 break;
@@ -369,6 +366,9 @@ public class ButtonManager implements SettingsManager.OnSettingChangedListener {
                 break;
             case BUTTON_GRID_LINES:
                 initializeGridLinesButton(button, cb, preCb, R.array.grid_lines_icons);
+                break;
+            case BUTTON_RULER_STYLE:
+                initializeRulerStyleButton(button, cb, preCb, R.array.ruler_style_icons);
                 break;
             case BUTTON_COUNTDOWN:
                 initializeCountdownButton(button, cb, preCb, R.array.countdown_duration_icons);
@@ -436,8 +436,8 @@ public class ButtonManager implements SettingsManager.OnSettingChangedListener {
      * calling {@link #enableCameraButton()}.
      */
     public void disableCameraButtonAndBlock() {
+        //TODO xxx
         mIsCameraButtonBlocked = true;
-        disableButton(BUTTON_CAMERA);
     }
 
     /**
@@ -476,18 +476,14 @@ public class ButtonManager implements SettingsManager.OnSettingChangedListener {
      * {@link #disableCameraButtonAndBlock()}.
      */
     public void enableCameraButton() {
+        //TODO xxx
         mIsCameraButtonBlocked = false;
-        enableButton(BUTTON_CAMERA);
     }
 
     /**
      * Enables a button that has already been initialized.
      */
     public void enableButton(int buttonId) {
-        // If Camera Button is blocked, ignore the request.
-        if(buttonId == BUTTON_CAMERA && mIsCameraButtonBlocked) {
-            return;
-        }
         ImageButton button;
         // Manual exposure uses a regular image button instead of a
         // MultiToggleImageButton, so it requires special handling.
@@ -914,6 +910,25 @@ public class ButtonManager implements SettingsManager.OnSettingChangedListener {
         int index = mSettingsManager.getIndexOfCurrentValue(SettingsManager.SCOPE_GLOBAL,
                                                             Keys.KEY_CAMERA_GRID_LINES);
         button.setState(index >= 0 ? index : 0, true);
+    }
+
+    public void initializeRulerStyleButton(MultiToggleImageButton button, final ButtonCallback cb, final ButtonCallback preCb, int resIdImages){
+        if(resIdImages>0){
+            button.overrideImageIds(resIdImages);
+        }
+        button.overrideContentDescriptions(R.array.ruler_style_descriptions);
+        setPreChangeCallback(button, preCb);
+        button.setOnStateChangeListener(new MultiToggleImageButton.OnStateChangeListener() {
+            @Override
+            public void stateChanged(View view, int state) {
+                mSettingsManager.setValueByIndex(SettingsManager.SCOPE_GLOBAL, Keys.KEY_CAMERA_RULER_STYLE, state);
+                if(cb!=null){
+                    cb.onStateChanged(state);
+                }
+            }
+        });
+        int index=mSettingsManager.getIndexOfCurrentValue(SettingsManager.SCOPE_GLOBAL, Keys.KEY_CAMERA_RULER_STYLE);
+        button.setState(index>=0? index:0, true);
     }
 
     public boolean isPanoEnabled() {

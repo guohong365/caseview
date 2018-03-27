@@ -71,7 +71,6 @@ import com.uc.android.camera.ui.TouchCoordinate;
 import com.uc.android.camera.util.AndroidServices;
 import com.uc.android.camera.util.ApiHelper;
 import com.uc.android.camera.util.CameraUtil;
-import com.uc.android.camera.util.GcamHelper;
 import com.uc.android.camera.util.GservicesHelper;
 import com.uc.android.camera.util.Size;
 import com.uc.caseview.R;
@@ -84,7 +83,7 @@ import com.uc.android.ex.camera2.portability.CameraAgent.CameraShutterCallback;
 import com.uc.android.ex.camera2.portability.CameraCapabilities;
 import com.uc.android.ex.camera2.portability.CameraDeviceInfo.Characteristics;
 import com.uc.android.ex.camera2.portability.CameraSettings;
-import com.google.common.logging.eventprotos;
+import com.uc.android.util.eventprotos;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -156,8 +155,6 @@ public class PhotoModule
     private boolean mContinuousFocusSupported;
 
     private static final String sTempCropFilename = "crop-temp";
-
-    private boolean mFaceDetectionStarted = false;
 
     // mCropValue and mSaveUri are used only if isImageCaptureIntent() is true.
     private String mCropValue;
@@ -366,8 +363,7 @@ public class PhotoModule
      */
     public PhotoModule(AppController app) {
         super(app);
-        mGcamModeIndex = app.getAndroidContext().getResources()
-                .getInteger(R.integer.camera_mode_gcam);
+        mGcamModeIndex = app.getAndroidContext().getResources().getInteger(R.integer.camera_mode_gcam);
     }
 
     @Override
@@ -377,7 +373,7 @@ public class PhotoModule
     }
 
     @Override
-    public void init(CameraActivity activity, boolean isSecureCamera, boolean isCaptureIntent) {
+    public void init(CameraActivity activity, boolean isCaptureIntent) {
         mActivity = activity;
         // TODO: Need to look at the controller interface to see if we can get
         // rid of passing in the activity directly.
@@ -449,7 +445,6 @@ public class PhotoModule
         mAppController.onPreviewStarted();
         mAppController.setShutterEnabled(true);
         setCameraState(IDLE);
-        startFaceDetection();
     }
 
     @Override
@@ -492,7 +487,6 @@ public class PhotoModule
 
         settingsManager.set(mAppController.getModuleScope(), Keys.KEY_CAMERA_ID, mCameraId);
         requestCameraOpen();
-        mUI.clearFaces();
         if (mFocusManager != null) {
             mFocusManager.removeMessages();
         }
@@ -555,13 +549,7 @@ public class PhotoModule
                 @Override
                 public void onStateChanged(int state) {
                     SettingsManager settingsManager = mActivity.getSettingsManager();
-                    if (GcamHelper.hasGcamAsSeparateModule(
-                            mAppController.getCameraFeatureConfig())) {
-                        // Set the camera setting to default backfacing.
-                        settingsManager.setToDefault(mAppController.getModuleScope(),
-                                                     Keys.KEY_CAMERA_ID);
-                        switchToGcamCapture();
-                    } else {
+
                         if (Keys.isHdrOn(settingsManager)) {
                             settingsManager.set(mAppController.getCameraScope(), Keys.KEY_SCENE_MODE,
                                     mCameraCapabilities.getStringifier().stringify(
@@ -577,7 +565,7 @@ public class PhotoModule
                         }
                         updateSceneMode();
                     }
-                }
+
             };
 
     private final View.OnClickListener mCancelCallback = new View.OnClickListener() {
@@ -607,9 +595,6 @@ public class PhotoModule
         // PhotoModule should hard reset HDR+ to off,
         // and HDR to off if HDR+ is supported.
         settingsManager.set(SettingsManager.SCOPE_GLOBAL, Keys.KEY_CAMERA_HDR_PLUS, false);
-        if (GcamHelper.hasGcamAsSeparateModule(mAppController.getCameraFeatureConfig())) {
-            settingsManager.set(SettingsManager.SCOPE_GLOBAL, Keys.KEY_CAMERA_HDR, false);
-        }
     }
 
     @Override
@@ -633,6 +618,7 @@ public class PhotoModule
         bottomBarSpec.enableHdr = true;
         bottomBarSpec.hdrCallback = mHdrPlusCallback;
         bottomBarSpec.enableGridLines = true;
+        bottomBarSpec.enableRulerStyle=true;
         if (mCameraCapabilities != null) {
             bottomBarSpec.enableExposureCompensation = true;
             bottomBarSpec.exposureCompensationSetCallback =
@@ -731,34 +717,6 @@ public class PhotoModule
                 return false;
             }
         });
-    }
-
-    @Override
-    public void startFaceDetection() {
-        if (mFaceDetectionStarted || mCameraDevice == null) {
-            return;
-        }
-        if (mCameraCapabilities.getMaxNumOfFacesSupported() > 0) {
-            mFaceDetectionStarted = true;
-            mUI.onStartFaceDetection(mDisplayOrientation, isCameraFrontFacing());
-            mCameraDevice.setFaceDetectionCallback(mHandler, mUI);
-            mCameraDevice.startFaceDetection();
-            SessionStatsCollector.instance().faceScanActive(true);
-        }
-    }
-
-    @Override
-    public void stopFaceDetection() {
-        if (!mFaceDetectionStarted || mCameraDevice == null) {
-            return;
-        }
-        if (mCameraCapabilities.getMaxNumOfFacesSupported() > 0) {
-            mFaceDetectionStarted = false;
-            mCameraDevice.setFaceDetectionCallback(null, null);
-            mCameraDevice.stopFaceDetection();
-            mUI.clearFaces();
-            SessionStatsCollector.instance().faceScanActive(false);
-        }
     }
 
     private final class ShutterCallback
@@ -1153,8 +1111,6 @@ public class PhotoModule
                 new JpegPictureCallback(loc));
 
         mNamedImages.nameNewImage(mCaptureStartTime);
-
-        mFaceDetectionStarted = false;
         return true;
     }
 
@@ -1335,9 +1291,6 @@ public class PhotoModule
                 newExtras.putParcelable(MediaStore.EXTRA_OUTPUT, mSaveUri);
             } else {
                 newExtras.putBoolean(CameraUtil.KEY_RETURN_DATA, true);
-            }
-            if (mActivity.isSecureCamera()) {
-                newExtras.putBoolean(CameraUtil.KEY_SHOW_WHEN_LOCKED, true);
             }
 
             // TODO: Share this constant.
@@ -1706,11 +1659,8 @@ public class PhotoModule
 
     private void closeCamera() {
         if (mCameraDevice != null) {
-            stopFaceDetection();
             mCameraDevice.setZoomChangeListener(null);
-            mCameraDevice.setFaceDetectionCallback(null, null);
 
-            mFaceDetectionStarted = false;
             mActivity.getCameraProvider().releaseCamera(mCameraDevice.getCameraId());
             mCameraDevice = null;
             setCameraState(PREVIEW_STOPPED);
@@ -1833,7 +1783,6 @@ public class PhotoModule
         if (mCameraDevice != null && mCameraState != PREVIEW_STOPPED) {
             Log.i(TAG, "stopPreview");
             mCameraDevice.stopPreview();
-            mFaceDetectionStarted = false;
         }
         setCameraState(PREVIEW_STOPPED);
         if (mFocusManager != null) {

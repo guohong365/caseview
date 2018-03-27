@@ -39,7 +39,7 @@ public class CameraActivity1 extends ActivityBase implements CameraFragment.OnFr
         setContentView(R.layout.activity_camera);
         if(null==savedInstanceState){
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.fragment_container, CameraFragment.newInstance("", ""))
+                    .replace(R.id.fragment_container, CameraFragment.newInstance(0))
                     .commit();
         }
          setFullScreenMode(FULL_SCREEN_MODE.FULL_SCREEN_HIDE_ALL);

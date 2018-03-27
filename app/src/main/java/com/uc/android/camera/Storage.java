@@ -29,7 +29,6 @@ import android.provider.MediaStore.Images.ImageColumns;
 import android.provider.MediaStore.MediaColumns;
 import android.util.LruCache;
 
-import com.uc.android.camera.data.FilmstripItemData;
 import com.uc.android.camera.debug.Log;
 import com.uc.android.camera.exif.ExifInterface;
 import com.uc.android.camera.util.ApiHelper;
@@ -46,6 +45,8 @@ import java.util.concurrent.TimeUnit;
 import javax.annotation.Nonnull;
 
 public class Storage {
+    public static final String MIME_TYPE_GIF = "image/gif";
+    public static final String MIME_TYPE_JPEG = "image/jpeg";
     public static final String DCIM =
             Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).toString();
     public static final String DIRECTORY = DCIM + "/Camera";
@@ -93,7 +94,7 @@ public class Storage {
             int height) throws IOException {
 
         return addImage(resolver, title, date, location, orientation, exif, jpeg, width, height,
-              FilmstripItemData.MIME_TYPE_JPEG);
+              MIME_TYPE_JPEG);
     }
 
     /**
@@ -421,9 +422,9 @@ public class Storage {
 
     public static String generateFilepath(String directory, String title, String mimeType) {
         String extension = null;
-        if (FilmstripItemData.MIME_TYPE_JPEG.equals(mimeType)) {
+        if (MIME_TYPE_JPEG.equals(mimeType)) {
             extension = JPEG_POSTFIX;
-        } else if (FilmstripItemData.MIME_TYPE_GIF.equals(mimeType)) {
+        } else if (MIME_TYPE_GIF.equals(mimeType)) {
             extension = GIF_POSTFIX;
         } else {
             throw new IllegalArgumentException("Invalid mimeType: " + mimeType);

@@ -22,7 +22,6 @@ import android.content.res.Resources;
 
 import com.uc.android.camera.CaptureModule;
 import com.uc.android.camera.PhotoModule;
-import com.uc.android.camera.VideoModule;
 import com.uc.android.camera.app.AppController;
 import com.uc.android.camera.app.ModuleManager;
 import com.uc.android.camera.captureintent.CaptureIntentModule;
@@ -32,7 +31,6 @@ import com.uc.android.camera.one.OneCameraException;
 import com.uc.android.camera.one.config.OneCameraFeatureConfig;
 import com.uc.android.camera.one.config.OneCameraFeatureConfig.HdrPlusSupportLevel;
 import com.uc.android.camera.settings.SettingsScopeNamespaces;
-import com.uc.android.camera.util.GcamHelper;
 import com.uc.android.camera.util.PhotoSphereHelper;
 import com.uc.android.camera.util.RefocusHelper;
 import com.uc.caseview.R;
@@ -51,23 +49,9 @@ public class ModulesInfo {
         registerPhotoModule(moduleManager, photoModuleId, SettingsScopeNamespaces.PHOTO,
                 config.isUsingCaptureModule());
         moduleManager.setDefaultModuleIndex(photoModuleId);
-        registerVideoModule(moduleManager, res.getInteger(R.integer.camera_mode_video),
-                SettingsScopeNamespaces.VIDEO);
-        if (PhotoSphereHelper.hasLightCycleCapture(context)) {
-            registerWideAngleModule(moduleManager, res.getInteger(R.integer.camera_mode_panorama),
-                    SettingsScopeNamespaces.PANORAMA);
-            registerPhotoSphereModule(moduleManager,
-                    res.getInteger(R.integer.camera_mode_photosphere),
-                    SettingsScopeNamespaces.PANORAMA);
-        }
         if (RefocusHelper.hasRefocusCapture(context)) {
             registerRefocusModule(moduleManager, res.getInteger(R.integer.camera_mode_refocus),
                     SettingsScopeNamespaces.REFOCUS);
-        }
-        if (GcamHelper.hasGcamAsSeparateModule(config)) {
-            registerGcamModule(moduleManager, res.getInteger(R.integer.camera_mode_gcam),
-                    SettingsScopeNamespaces.PHOTO,
-                    config.getHdrPlusSupportLevel(OneCamera.Facing.BACK));
         }
         int imageCaptureIntentModuleId = res.getInteger(R.integer.camera_mode_capture_intent);
         registerCaptureIntentModule(moduleManager, imageCaptureIntentModuleId,
@@ -101,31 +85,6 @@ public class ModulesInfo {
             public ModuleController createModule(AppController app, Intent intent) {
                 Log.v(TAG, "EnableCaptureModule = " + enableCaptureModule);
                 return enableCaptureModule ? new CaptureModule(app) : new PhotoModule(app);
-            }
-        });
-    }
-
-    private static void registerVideoModule(ModuleManager moduleManager, final int moduleId,
-            final String namespace) {
-        moduleManager.registerModule(new ModuleManager.ModuleAgent() {
-            @Override
-            public int getModuleId() {
-                return moduleId;
-            }
-
-            @Override
-            public boolean requestAppForCamera() {
-                return true;
-            }
-
-            @Override
-            public String getScopeNamespace() {
-                return namespace;
-            }
-
-            @Override
-            public ModuleController createModule(AppController app, Intent intent) {
-                return new VideoModule(app);
             }
         });
     }
@@ -201,31 +160,6 @@ public class ModulesInfo {
             @Override
             public ModuleController createModule(AppController app, Intent intent) {
                 return RefocusHelper.createRefocusModule(app);
-            }
-        });
-    }
-
-    private static void registerGcamModule(ModuleManager moduleManager, final int moduleId,
-            final String namespace, final HdrPlusSupportLevel hdrPlusSupportLevel) {
-        moduleManager.registerModule(new ModuleManager.ModuleAgent() {
-            @Override
-            public int getModuleId() {
-                return moduleId;
-            }
-
-            @Override
-            public boolean requestAppForCamera() {
-                return false;
-            }
-
-            @Override
-            public String getScopeNamespace() {
-                return namespace;
-            }
-
-            @Override
-            public ModuleController createModule(AppController app, Intent intent) {
-                return GcamHelper.createGcamModule(app, hdrPlusSupportLevel);
             }
         });
     }

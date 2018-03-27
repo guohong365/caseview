@@ -34,7 +34,6 @@ import com.uc.android.camera.captureintent.PictureDecoder;
 import com.uc.android.camera.debug.DebugPropertyHelper;
 import com.uc.android.camera.debug.Log;
 import com.uc.android.camera.ui.CountDownView;
-import com.uc.android.camera.ui.FaceView;
 import com.uc.android.camera.ui.PreviewOverlay;
 import com.uc.android.camera.ui.PreviewStatusListener;
 import com.uc.android.camera.ui.focus.FocusRing;
@@ -43,8 +42,7 @@ import com.uc.android.ex.camera2.portability.CameraAgent;
 import com.uc.android.ex.camera2.portability.CameraCapabilities;
 import com.uc.android.ex.camera2.portability.CameraSettings;
 
-public class PhotoUI implements PreviewStatusListener,
-    CameraAgent.CameraFaceDetectionCallback, PreviewStatusListener.PreviewAreaChangedListener {
+public class PhotoUI implements PreviewStatusListener, PreviewStatusListener.PreviewAreaChangedListener {
 
     private static final Log.Tag TAG = new Log.Tag("PhotoUI");
     private static final int DOWN_SAMPLE_FACTOR = 4;
@@ -59,7 +57,6 @@ public class PhotoUI implements PreviewStatusListener,
     private Dialog mDialog = null;
 
     // TODO: Remove face view logic if UX does not bring it back within a month.
-    private final FaceView mFaceView;
     private DecodeImageForReview mDecodeTaskForReview = null;
 
     private float mZoomMax;
@@ -150,9 +147,6 @@ public class PhotoUI implements PreviewStatusListener,
 
     @Override
     public void onPreviewAreaChanged(RectF previewArea) {
-        if (mFaceView != null) {
-            mFaceView.onPreviewAreaChanged(previewArea);
-        }
         mCountdownView.onPreviewAreaChanged(previewArea);
     }
 
@@ -204,12 +198,6 @@ public class PhotoUI implements PreviewStatusListener,
         mFocusRing = (FocusRing) mRootView.findViewById(R.id.focus_ring);
         mPreviewOverlay = (PreviewOverlay) mRootView.findViewById(R.id.preview_overlay);
         mCountdownView = (CountDownView) mRootView.findViewById(R.id.count_down_view);
-        // Show faces if we are in debug mode.
-        if (DebugPropertyHelper.showCaptureDebugUI()) {
-            mFaceView = (FaceView) mRootView.findViewById(R.id.face_view);
-        } else {
-            mFaceView = null;
-        }
 
         if (mController.isImageCaptureIntent()) {
             initIntentReviewImageView();
@@ -355,20 +343,15 @@ public class PhotoUI implements PreviewStatusListener,
         mDecodeTaskForReview.execute();
 
         mActivity.getCameraAppUI().transitionToIntentReviewLayout();
-        pauseFaceDetection();
     }
 
     protected void hidePostCaptureAlert() {
         if (mDecodeTaskForReview != null) {
             mDecodeTaskForReview.cancel(true);
         }
-        resumeFaceDetection();
     }
 
     public void setDisplayOrientation(int orientation) {
-        if (mFaceView != null) {
-            mFaceView.setDisplayOrientation(orientation);
-        }
     }
 
     private class ZoomChangeListener implements PreviewOverlay.OnZoomChangedListener {
@@ -391,49 +374,10 @@ public class PhotoUI implements PreviewStatusListener,
     }
 
     public void onPause() {
-        if (mFaceView != null) {
-            mFaceView.clear();
-        }
         if (mDialog != null) {
             mDialog.dismiss();
         }
         // recalculate aspect ratio when restarting.
         mAspectRatio = 0.0f;
     }
-
-    public void clearFaces() {
-        if (mFaceView != null) {
-            mFaceView.clear();
-        }
-    }
-
-    public void pauseFaceDetection() {
-        if (mFaceView != null) {
-            mFaceView.pause();
-        }
-    }
-
-    public void resumeFaceDetection() {
-        if (mFaceView != null) {
-            mFaceView.resume();
-        }
-    }
-
-    public void onStartFaceDetection(int orientation, boolean mirror) {
-        if (mFaceView != null) {
-            mFaceView.clear();
-            mFaceView.setVisibility(View.VISIBLE);
-            mFaceView.setDisplayOrientation(orientation);
-            mFaceView.setMirror(mirror);
-            mFaceView.resume();
-        }
-    }
-
-    @Override
-    public void onFaceDetection(Face[] faces, CameraAgent.CameraProxy camera) {
-        if (mFaceView != null) {
-            mFaceView.setFaces(faces);
-        }
-    }
-
 }

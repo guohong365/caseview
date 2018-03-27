@@ -1182,11 +1182,6 @@ class AndroidCamera2AgentImpl extends CameraAgent {
         @Override
         public void setZoomChangeListener(android.hardware.Camera.OnZoomChangeListener listener) {}
 
-        // TODO: Implement
-        @Override
-        public void setFaceDetectionCallback(Handler handler, CameraFaceDetectionCallback callback)
-                {}
-
         // TODO: Remove this method override once we handle this message
         @Override
         public void startFaceDetection() {}

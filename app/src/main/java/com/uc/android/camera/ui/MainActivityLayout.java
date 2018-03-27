@@ -29,8 +29,6 @@ import android.widget.FrameLayout;
 import com.uc.android.camera.app.CameraAppUI;
 import com.uc.android.camera.debug.Log;
 import com.uc.android.camera.util.CameraUtil;
-import com.uc.android.camera.widget.FilmstripLayout;
-import com.uc.caseview.R;
 
 public class MainActivityLayout extends FrameLayout {
 
@@ -38,8 +36,6 @@ public class MainActivityLayout extends FrameLayout {
     // Only check for intercepting touch events within first 500ms
     private static final int SWIPE_TIME_OUT = 500;
 
-    private ModeListView mModeList;
-    private FilmstripLayout mFilmstripLayout;
     private boolean mCheckToIntercept;
     private MotionEvent mDown;
     private final int mSlop;
@@ -102,21 +98,6 @@ public class MainActivityLayout extends FrameLayout {
             }
             int deltaX = (int) (ev.getX() - mDown.getX());
             int deltaY = (int) (ev.getY() - mDown.getY());
-            if (ev.getActionMasked() == MotionEvent.ACTION_MOVE
-                    && Math.abs(deltaX) > mSlop) {
-                // Intercept right swipe
-                if (deltaX >= Math.abs(deltaY) * 2) {
-                    mTouchReceiver = mModeList;
-                    onTouchEvent(mDown);
-                    return true;
-                }
-                // Intercept left swipe
-                else if (deltaX < -Math.abs(deltaY) * 2) {
-                    mTouchReceiver = mFilmstripLayout;
-                    onTouchEvent(mDown);
-                    return true;
-                }
-            }
         }
         return false;
     }
@@ -128,13 +109,6 @@ public class MainActivityLayout extends FrameLayout {
             return mTouchReceiver.dispatchTouchEvent(ev);
         }
         return false;
-    }
-
-    @Override
-    public void onFinishInflate() {
-        super.onFinishInflate();
-        mModeList = (ModeListView) findViewById(R.id.mode_list_layout);
-        mFilmstripLayout = (FilmstripLayout) findViewById(R.id.filmstrip_layout);
     }
 
     public void redirectTouchEventsTo(View touchReceiver) {

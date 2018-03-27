@@ -24,7 +24,6 @@ import com.uc.android.camera.debug.Log;
 import com.uc.android.camera.one.config.OneCameraFeatureConfig.CaptureSupportLevel;
 import com.uc.android.camera.one.config.OneCameraFeatureConfig.HdrPlusSupportLevel;
 import com.uc.android.camera.util.ApiHelper;
-import com.uc.android.camera.util.GcamHelper;
 import com.uc.android.camera.util.GservicesHelper;
 import com.google.common.base.Function;
 import com.google.common.base.Optional;
@@ -45,8 +44,7 @@ public class OneCameraFeatureConfigCreator {
         Log.i(TAG, "CaptureModule? " + useCaptureModule);
 
         // HDR+ has multiple levels of support.
-        HdrPlusSupportLevel hdrPlusSupportLevel =
-                GcamHelper.determineHdrPlusSupportLevel(contentResolver, useCaptureModule);
+        HdrPlusSupportLevel hdrPlusSupportLevel =HdrPlusSupportLevel.NONE;
         return new OneCameraFeatureConfig(useCaptureModule,
                 buildCaptureModuleDetector(contentResolver),
                 hdrPlusSupportLevel,

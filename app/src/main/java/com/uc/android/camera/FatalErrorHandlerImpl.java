@@ -21,7 +21,7 @@ import android.app.Activity;
 import com.uc.android.camera.debug.Log;
 import com.uc.android.camera.stats.UsageStatistics;
 import com.uc.android.camera.util.CameraUtil;
-import com.google.common.logging.eventprotos;
+import com.uc.android.util.eventprotos;
 
 public final class FatalErrorHandlerImpl implements FatalErrorHandler {
     private static final Log.Tag TAG = new Log.Tag("FatalErrorHandler");

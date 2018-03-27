@@ -12,7 +12,7 @@
     <color name="recording_time_elapsed_text">#FFFFFFFF</color>
     <color name="recording_time_remaining_text">#FFFF0033</color>
     <color name="on_viewfinder_label_background_color">#77333333</color>
-    <color name="review_control_pressed_color">#FF33B5E5</color>
+    <color name="review_control_pressed_color">#33b5e5</color>
     <color name="review_control_pressed_fan_color">#3F33B5E5</color>
     <color name="review_background">#FF000000</color>
     <color name="icon_disabled_color">#DD777777</color>
@@ -61,6 +61,7 @@
     <color name="indicators_background_color">#4c000000</color>
 
     <color name="grid_line">#33FFFFFF</color>
+    <color name="grid_border">#CFFFFFFF</color>
     <color name="focus_outer_ring_color">#4CFFFFFF</color>
     <color name="fullscreen_dialog_background_color">@color/main_color_global</color>
     <color name="dialog_button_color">#FF76A7F9</color>
@@ -71,4 +72,17 @@
     <color name="mode_icon_hover_highlight">#2DFFFFFF</color>
 
     <color name="blue_button_text_color">#00838F</color>
+
+    <color name="case_level_0">#FF006AFF</color>
+    <color name="case_level_1">#FF00FFFF</color>
+    <color name="case_level_2">#FF00FF6A</color>
+    <color name="case_level_3">#FFFF6A00</color>
+    <color name="case_level_4">#FFFF0000</color>
+    <color name="case_level_0_pressed">#FF0035C0</color>
+    <color name="case_level_1_pressed">#FF00C0C0</color>
+    <color name="case_level_2_pressed">#FF00C035</color>
+    <color name="case_level_3_pressed">#FFC03500</color>
+    <color name="case_level_4_pressed">#FFC00000</color>
+
+    <color name="case_level_background">#CCFFFFFF</color>
 </resources>

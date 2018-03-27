@@ -1,8 +1,10 @@
 package com.uc.caseview.adapter;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
+import android.support.v4.content.res.TypedArrayUtils;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -22,6 +24,8 @@ import java.util.List;
 
 public class CaseListAdapter extends RecyclerViewAdapterBase<CaseListViewHolder> {
     private int current;
+    private TypedArray levels;
+
     public void setCurrent(int current) {
         this.current = current;
     }
@@ -32,6 +36,14 @@ public class CaseListAdapter extends RecyclerViewAdapterBase<CaseListViewHolder>
 
     public CaseListAdapter(@NonNull Context context, @NonNull List<CaseItem> caseList) {
         super(context, new ArrayList<Selectable>(caseList), new CaseListViewViewHolderFactory(context));
+        levels=context.getResources().obtainTypedArray(R.array.case_level_drawables);
+
+    }
+
+    @Override
+    protected void finalize() throws Throwable {
+        super.finalize();
+        levels.recycle();
     }
 
     @Override
@@ -51,6 +63,8 @@ public class CaseListAdapter extends RecyclerViewAdapterBase<CaseListViewHolder>
                 .placeholder(R.drawable.main_action_gallery_48dp)
                 .error(R.drawable.main_action_gallery_48dp)
                 .into(holder.previewImage);
+        holder.caseLevel.setImageDrawable(levels.getDrawable(((CaseItem) item).getLevel()));
+
     }
 
     @Override

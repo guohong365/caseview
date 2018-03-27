@@ -177,12 +177,18 @@ public class EntityUtils {
         LogUtils.logItems(TAG, list);
         return list;
     }
-    public static boolean isCaseExistsByTitle(String title){
-        return getSession()
-                .getCaseItemDao()
-                .queryBuilder()
-                .where(CaseItemDao.Properties.Title.eq(title))
-                .buildCount().count() > 0;
+    public static boolean isCaseExistsByTitle(Long id, String title){
+        return id==null ?
+                getSession()
+                        .getCaseItemDao()
+                        .queryBuilder()
+                        .where(CaseItemDao.Properties.Title.eq(title))
+                        .buildCount().count() > 0 :
+                getSession()
+                        .getCaseItemDao().
+                        queryBuilder()
+                        .where(CaseItemDao.Properties.Title.eq(title), CaseItemDao.Properties.Id.notEq(id))
+                        .buildCount().count()>0;
     }
     public static long getCaseImageCount(long caseId){
         return getSession()

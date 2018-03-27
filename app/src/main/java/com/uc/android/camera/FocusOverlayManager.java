@@ -115,8 +115,6 @@ public class FocusOverlayManager implements PreviewStatusListener.PreviewAreaCha
         public void autoFocus();
         public void cancelAutoFocus();
         public boolean capture();
-        public void startFaceDetection();
-        public void stopFaceDetection();
         public void setFocusParameters();
     }
 
@@ -146,7 +144,6 @@ public class FocusOverlayManager implements PreviewStatusListener.PreviewAreaCha
             switch (msg.what) {
                 case RESET_TOUCH_FOCUS: {
                     manager.cancelAutoFocus();
-                    manager.mListener.startFaceDetection();
                     break;
                 }
             }
@@ -386,9 +383,6 @@ public class FocusOverlayManager implements PreviewStatusListener.PreviewAreaCha
         // Log manual tap to focus.
         mTouchCoordinate = new TouchCoordinate(x, y, mPreviewRect.width(), mPreviewRect.height());
         mTouchTime = System.currentTimeMillis();
-
-        // Stop face detection because we want to specify focus and metering area.
-        mListener.stopFaceDetection();
 
         // Set the focus area and metering area.
         mListener.setFocusParameters();

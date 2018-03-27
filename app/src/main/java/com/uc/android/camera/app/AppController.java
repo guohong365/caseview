@@ -44,6 +44,8 @@ import com.uc.android.camera.ui.PreviewStatusListener;
  */
 public interface AppController {
 
+    void onModeSelected(int integer);
+
     /**
      * An interface which defines the shutter events listener.
      */
@@ -132,29 +134,12 @@ public interface AppController {
     public int getModuleId(int modeIndex);
 
     /**
-     * Gets the mode that can be switched to from the given mode id through
-     * quick switch.
-     *
-     * @param currentModuleIndex index of the current mode
-     * @return mode id to quick switch to if index is valid, otherwise returns
-     *         the given mode id itself
-     */
-    public int getQuickSwitchToModuleId(int currentModuleIndex);
-
-    /**
      * Based on a mode switcher index, choose the correct module index.
      *
      * @param modeIndex mode switcher index.
      * @return module index.
      */
     public int getPreferredChildModeIndex(int modeIndex);
-
-    /**
-     * This gets called when mode is changed.
-     *
-     * @param moduleIndex index of the new module to switch to
-     */
-    public void onModeSelected(int moduleIndex);
 
     /**
      * This gets called when settings is selected and settings dialog needs to open.

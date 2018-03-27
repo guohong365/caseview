@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.uc.android.camera.CameraActivity;
 import com.uc.caseview.common.DialogWaiting;
 import com.uc.caseview.utils.FileUtils;
 import com.uc.caseview.view.Action;
@@ -45,6 +46,7 @@ public abstract class ActivityBase extends AppCompatActivity implements ResultPr
         Uri uri = FileProvider.getUriForFile(this, AUTHORITIES, takePhotoFile);
         intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
         intent.putExtra(MediaStore.EXTRA_FULL_SCREEN, true);
+        intent.setClass(getApplicationContext(), CameraActivity.class);
         startActivityForResult(intent, Action.TAKE_PHOTO.getCode());
         Log.v(TAG, "system camera started...");
     }

@@ -22,8 +22,8 @@ import android.location.Location;
 import android.net.Uri;
 import android.os.AsyncTask;
 
+import com.uc.android.camera.Storage;
 import com.uc.android.camera.app.MediaSaver;
-import com.uc.android.camera.data.FilmstripItemData;
 import com.uc.android.camera.debug.Log;
 import com.uc.android.camera.exif.ExifInterface;
 import com.uc.android.camera.stats.CaptureSessionStatsCollector;
@@ -320,7 +320,7 @@ public class CaptureSessionImpl implements CaptureSession {
         } else {
             try {
                 mContentUri = mPlaceholderManager.finishPlaceholder(mPlaceHolder, mLocation,
-                        orientation, exif, data, width, height, FilmstripItemData.MIME_TYPE_JPEG);
+                        orientation, exif, data, width, height, Storage.MIME_TYPE_JPEG);
                 mSessionNotifier.notifyTaskDone(mUri);
                 futureResult.set(Optional.fromNullable(mUri));
 

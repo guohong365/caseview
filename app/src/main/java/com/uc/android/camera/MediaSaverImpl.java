@@ -25,7 +25,6 @@ import android.os.AsyncTask;
 import android.provider.MediaStore.Video;
 
 import com.uc.android.camera.app.MediaSaver;
-import com.uc.android.camera.data.FilmstripItemData;
 import com.uc.android.camera.debug.Log;
 import com.uc.android.camera.exif.ExifInterface;
 
@@ -69,7 +68,7 @@ public class MediaSaverImpl implements MediaSaver {
     public void addImage(final byte[] data, String title, long date, Location loc, int width,
             int height, int orientation, ExifInterface exif, OnMediaSavedListener l) {
         addImage(data, title, date, loc, width, height, orientation, exif, l,
-                FilmstripItemData.MIME_TYPE_JPEG);
+                Storage.MIME_TYPE_JPEG);
     }
 
     @Override
@@ -97,13 +96,13 @@ public class MediaSaverImpl implements MediaSaver {
         // When dimensions are unknown, pass 0 as width and height,
         // and decode image for width and height later in a background thread
         addImage(data, title, date, loc, 0, 0, orientation, exif, l,
-                FilmstripItemData.MIME_TYPE_JPEG);
+                Storage.MIME_TYPE_JPEG);
     }
     @Override
     public void addImage(final byte[] data, String title, Location loc, int width, int height,
             int orientation, ExifInterface exif, OnMediaSavedListener l) {
         addImage(data, title, System.currentTimeMillis(), loc, width, height, orientation, exif, l,
-                FilmstripItemData.MIME_TYPE_JPEG);
+                Storage.MIME_TYPE_JPEG);
     }
 
     @Override

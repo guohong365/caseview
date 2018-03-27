@@ -202,21 +202,7 @@ public abstract class CameraAgent {
         public void onPreviewFrame(byte[] data, CameraProxy camera);
     }
 
-    /**
-     * An interface which wraps
-     * {@link Camera.FaceDetectionListener}.
-     */
-    public static interface CameraFaceDetectionCallback {
-        /**
-         * Callback for face detection.
-         *
-         * @param faces   Recognized face in the preview.
-         * @param camera  The camera which the preview image comes from.
-         */
-        public void onFaceDetection(Camera.Face[] faces, CameraProxy camera);
-    }
-
-    /**
+     /**
      * An interface to be called when the camera preview has started.
      */
     public static interface CameraStartPreviewCallback {
@@ -773,15 +759,6 @@ public abstract class CameraAgent {
          * @param listener The listener.
          */
         public abstract void setZoomChangeListener(OnZoomChangeListener listener);
-
-        /**
-         * Sets the face detection listener.
-         *
-         * @param handler  The handler in which the callback will be invoked.
-         * @param callback The callback for face detection results.
-         */
-        public abstract void setFaceDetectionCallback(Handler handler,
-                                                      CameraFaceDetectionCallback callback);
 
         /**
          * Starts the face detection.

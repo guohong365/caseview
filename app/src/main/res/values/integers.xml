@@ -19,4 +19,10 @@
 <resources>
     <integer name="bottom_bar_background_alpha_overlay">153</integer>
     <integer name="bottom_bar_background_alpha">255</integer>
+    
+    <integer name="case_level_0">0</integer>
+    <integer name="case_level_1">1</integer>
+    <integer name="case_level_2">2</integer>
+    <integer name="case_level_3">3</integer>
+    <integer name="case_level_4">4</integer>
 </resources>

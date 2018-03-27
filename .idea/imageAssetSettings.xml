@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ImageAssetSettings">
+    <option name="children">
+      <map>
+        <entry key="imageAssetPanel">
+          <value>
+            <PersistentState>
+              <option name="children">
+                <map>
+                  <entry key="actionbar">
+                    <value>
+                      <PersistentState>
+                        <option name="children">
+                          <map>
+                            <entry key="clipartAsset">
+                              <value>
+                                <PersistentState>
+                                  <option name="values">
+                                    <map>
+                                      <entry key="url" value="jar:file:/D:/Develop/Android/android-studio/plugins/android/lib/android.jar!/images/material_design_icons/image/ic_straighten_black_24dp.xml" />
+                                    </map>
+                                  </option>
+                                </PersistentState>
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
+                        <option name="values">
+                          <map>
+                            <entry key="assetType" value="IMAGE" />
+                            <entry key="imageAsset" value="D:\AndroidStudioProjects\CaseView\app\src\main\res\drawable\ic_ruler_style_none_normal.xml" />
+                            <entry key="outputName" value="ic_ruler_style_none_normal" />
+                            <entry key="theme" value="CUSTOM" />
+                            <entry key="themeColor" value="ffffff" />
+                          </map>
+                        </option>
+                      </PersistentState>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+              <option name="values">
+                <map>
+                  <entry key="outputIconType" value="ACTIONBAR" />
+                </map>
+              </option>
+            </PersistentState>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

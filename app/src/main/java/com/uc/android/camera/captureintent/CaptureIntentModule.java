@@ -130,7 +130,7 @@ public class CaptureIntentModule extends CameraModule {
 
     @Override
     public void init(
-            final CameraActivity activity, boolean isSecureCamera, boolean isCaptureIntent) {
+            final CameraActivity activity, boolean isCaptureIntent) {
         mResourceConstructed.get().getAppController()
                 .setPreviewStatusListener(mPreviewStatusListener);
 

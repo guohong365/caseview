@@ -341,6 +341,16 @@
       <item>@string/grid_lines_off_desc</item>
       <item>@string/grid_lines_on_desc</item>
     </array>
+    <array name="ruler_style_descriptions" translatable="false">
+        <item>@string/ruler_style_none</item>
+        <item>@string/ruler_style_cm</item>
+        <item>@string/ruler_style_mm</item>
+    </array>
+    <array name="ruler_style_icons" translatable="false">
+        <item>@drawable/ruler_style_none</item>
+        <item>@drawable/ruler_style_cm</item>
+        <item>@drawable/ruler_style_mm</item>
+    </array>
 
     <array name="countdown_duration_descriptions" translatable="false">
         <item>@string/countdown_timer_off</item>
@@ -517,4 +527,28 @@
         <item>@drawable/shutter_button_background_still</item>
         <item>@drawable/shutter_button_background_still</item>
     </array>
+    <array name="case_level_colors">
+        <item>@color/case_level_0</item>
+        <item>@color/case_level_1</item>
+        <item>@color/case_level_2</item>
+        <item>@color/case_level_3</item>
+        <item>@color/case_level_4</item>
+    </array>
+    <array name="case_level_drawables">
+        <item>@drawable/case_level_0_normal</item>
+        <item>@drawable/case_level_1_normal</item>
+        <item>@drawable/case_level_2_normal</item>
+        <item>@drawable/case_level_3_normal</item>
+        <item>@drawable/case_level_4_normal</item>
+    </array>
+
+    <integer name="ruler_style_none">0</integer>
+    <integer name="ruler_style_cm">1</integer>
+    <integer name="ruler_style_mm">2</integer>
+    
+    <integer-array name="pref_camera_ruler_styles">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </integer-array>
 </resources>

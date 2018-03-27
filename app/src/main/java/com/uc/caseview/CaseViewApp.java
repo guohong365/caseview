@@ -9,6 +9,7 @@ import android.util.Log;
 
 import com.uc.android.camera.app.CameraApp;
 import com.uc.android.camera.app.FirstRunDetector;
+import com.uc.android.camera.app.LocationManager;
 import com.uc.android.camera.stats.UsageStatistics;
 import com.uc.android.camera.stats.profiler.Profile;
 import com.uc.android.camera.stats.profiler.Profilers;
@@ -27,7 +28,7 @@ public class CaseViewApp extends CameraApp {
     public static final String APP_DB = "case_view.db";
     public static String TAG;
     public static CaseViewApp App;
-
+    public static LocationManager locationManager;
     public CaseViewApp() {
         GlobalHolder.debug=true;
         GlobalHolder.gridColumns=3;
@@ -44,6 +45,7 @@ public class CaseViewApp extends CameraApp {
     public void onCreate() {
         super.onCreate();
         App =this;
+        locationManager=new LocationManager(this);
     }
 
     private void initPath() throws IOException {

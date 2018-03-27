@@ -6,7 +6,6 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -21,8 +20,8 @@
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
     <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS" />
+
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
@@ -34,7 +33,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.uc.caseview.StartScreenActivity"
+            android:name=".StartScreenActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:theme="@style/FullscreenTheme">
             <intent-filter>
@@ -43,21 +42,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.uc.caseview.MainActivity" />
-        <activity android:name="com.uc.caseview.CaseListViewActivity" />
-        <activity android:name="com.uc.caseview.SearchActivity" />
-        <activity android:name="com.uc.caseview.GalleryActivity" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".CaseListViewActivity" />
+        <activity android:name=".SearchActivity" />
+        <activity android:name=".GalleryActivity" />
         <activity
-            android:name="com.uc.caseview.ImageFullscreenViewActivity"
+            android:name=".ImageFullscreenViewActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:theme="@style/FullscreenTheme" />
-        <activity android:name="com.uc.caseview.CaseContentActivity" />
-        <activity android:name="com.uc.caseview.NewCaseActivity" />
-        <activity android:name="com.uc.caseview.DeviceListActivity" />
-        <activity android:name="com.uc.caseview.CasePhotoSelectActivity" />
-        <activity android:name="com.uc.caseview.HorizontalGalleryActivity" />
-        <activity android:name="com.uc.caseview.CompareActivity"/>
-        <activity android:name="com.uc.android.camera.PermissionsActivity"/>
+        <activity android:name=".CaseContentActivity" />
+        <activity android:name=".NewCaseActivity" />
+        <activity android:name=".CasePhotoSelectActivity" />
+        <activity android:name=".HorizontalGalleryActivity" />
+        <activity android:name=".CompareActivity" />
+        <activity android:name="com.uc.android.camera.PermissionsActivity" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -71,21 +69,23 @@
 
         <activity
             android:name="com.uc.android.camera.CameraActivity"
+            android:launchMode="singleTask"
             android:theme="@style/Theme.Camera"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"
-            android:launchMode="singleTask">
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
             <meta-data
                 android:name="com.uc.android.keyguard.layout"
                 android:resource="@layout/keyguard_widget" />
         </activity>
         <activity
-            android:name="com.uc.caseview.SettingsActivity"
+            android:name=".SettingsActivity"
             android:label="@string/title_activity_settings" />
         <activity
             android:name="com.uc.android.camera.settings.CameraSettingsActivity"
-            android:theme="@style/Theme.CameraSettings"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:label="@string/title_activity_camera_settings"/>
+            android:label="@string/title_activity_camera_settings"
+            android:theme="@style/Theme.CameraSettings" />
+        <activity android:name="com.uc.android.Camera2Activity" />
+        <activity android:name=".Compare2Activity"></activity>
     </application>
 
 </manifest>

@@ -18,7 +18,7 @@ package com.uc.android.camera.one.v2.errorhandling;
 
 import com.uc.android.camera.FatalErrorHandler;
 import com.uc.android.camera.stats.UsageStatistics;
-import com.google.common.logging.eventprotos;
+import com.uc.android.util.eventprotos;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 

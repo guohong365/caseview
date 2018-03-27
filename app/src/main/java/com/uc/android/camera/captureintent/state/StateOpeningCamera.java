@@ -263,6 +263,7 @@ public final class StateOpeningCamera extends StateImpl {
         };
         /** Grid lines button UI spec. */
         bottomBarSpec.enableGridLines = true;
+        bottomBarSpec.enableRulerStyle=true;
         /** HDR button UI spec. */
         bottomBarSpec.enableHdr = false;
         bottomBarSpec.hideHdr = true;

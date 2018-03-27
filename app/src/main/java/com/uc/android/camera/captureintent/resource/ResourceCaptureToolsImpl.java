@@ -37,7 +37,7 @@ import com.uc.android.camera.ui.focus.FocusSound;
 import com.uc.android.camera.util.AndroidServices;
 import com.uc.android.camera.util.CameraUtil;
 import com.uc.caseview.R;
-import com.google.common.logging.eventprotos;
+import com.uc.android.util.eventprotos;
 
 public final class ResourceCaptureToolsImpl implements ResourceCaptureTools {
     private static final Log.Tag TAG = new Log.Tag("ResCapTools");

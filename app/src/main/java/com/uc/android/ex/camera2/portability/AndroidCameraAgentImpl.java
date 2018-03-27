@@ -959,24 +959,6 @@ class AndroidCameraAgentImpl extends CameraAgent {
             }
         }
 
-        @Override
-        public void setFaceDetectionCallback(final Handler handler,
-                final CameraFaceDetectionCallback cb) {
-            try {
-                mDispatchThread.runJob(new Runnable() {
-                    @Override
-                    public void run() {
-                        mCameraHandler.obtainMessage(CameraActions.SET_FACE_DETECTION_LISTENER,
-                                FaceDetectionCallbackForward
-                                        .getNewInstance(handler, AndroidCameraProxyImpl.this, cb))
-                                .sendToTarget();
-                    }
-                });
-            } catch (final RuntimeException ex) {
-                mCameraAgent.getCameraExceptionHandler().onDispatchThreadException(ex);
-            }
-        }
-
         @Deprecated
         @Override
         public void setParameters(final Parameters params) {
@@ -1300,44 +1282,4 @@ class AndroidCameraAgentImpl extends CameraAgent {
         }
     }
 
-    private static class FaceDetectionCallbackForward implements FaceDetectionListener {
-        private final Handler mHandler;
-        private final CameraFaceDetectionCallback mCallback;
-        private final CameraProxy mCamera;
-
-        /**
-         * Returns a new instance of {@link FaceDetectionCallbackForward}.
-         *
-         * @param handler The handler in which the callback will be invoked in.
-         * @param camera  The {@link CameraProxy} which the callback is from.
-         * @param cb      The callback to be invoked.
-         * @return        The instance of the {@link FaceDetectionCallbackForward},
-         *                or null if any parameter is null.
-         */
-        public static FaceDetectionCallbackForward getNewInstance(
-                Handler handler, CameraProxy camera, CameraFaceDetectionCallback cb) {
-            if (handler == null || camera == null || cb == null) {
-                return null;
-            }
-            return new FaceDetectionCallbackForward(handler, camera, cb);
-        }
-
-        private FaceDetectionCallbackForward(
-                Handler h, CameraProxy camera, CameraFaceDetectionCallback cb) {
-            mHandler = h;
-            mCamera = camera;
-            mCallback = cb;
-        }
-
-        @Override
-        public void onFaceDetection(
-                final Camera.Face[] faces, Camera camera) {
-            mHandler.post(new Runnable() {
-                @Override
-                public void run() {
-                    mCallback.onFaceDetection(faces, mCamera);
-                }
-            });
-        }
-    }
 }

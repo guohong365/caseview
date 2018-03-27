@@ -38,6 +38,7 @@ public class TopRightWeightedLayout extends LinearLayout {
 
     @Override
     public void onFinishInflate() {
+        super.onFinishInflate();
         Configuration configuration = getContext().getResources().getConfiguration();
         checkOrientation(configuration.orientation);
     }

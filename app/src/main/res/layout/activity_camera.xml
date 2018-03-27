@@ -7,8 +7,119 @@
     android:id="@+id/activity_root_view"
     android:background="@null">
 
-    <include layout="@layout/camera" />
-    <include layout="@layout/camera_filmstrip" />
+    <FrameLayout
+        android:id="@+id/camera_app_root"
+        android:background="@android:color/black"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <TextureView
+            android:id="@+id/preview_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <com.uc.android.camera.ui.focus.FocusRingView
+            android:id="@+id/focus_ring"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <com.uc.android.camera.ui.CaptureAnimationOverlay
+            android:id="@+id/capture_overlay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="invisible" />
+
+        <com.uc.android.camera.ui.PreviewOverlay
+            android:id="@+id/preview_overlay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <com.uc.android.camera.ui.GridLines
+            android:id="@+id/grid_lines"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:visibility="visible" />
+
+        <ImageView
+            android:id="@+id/intent_review_imageview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitCenter"
+            android:background="@android:color/black"
+            android:visibility="gone" />
+
+        <FrameLayout
+            android:id="@+id/module_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <com.uc.android.camera.ui.StickyBottomCaptureLayout
+            android:id="@+id/sticky_bottom_capture_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <com.uc.android.camera.widget.RoundedThumbnailView
+                android:id="@+id/rounded_thumbnail_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="invisible" />
+
+            <com.uc.android.camera.widget.ModeOptionsOverlay
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/mode_options_overlay"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <include layout="@layout/mode_options" />
+                <include layout="@layout/indicators" />
+            </com.uc.android.camera.widget.ModeOptionsOverlay>
+
+            <com.uc.android.camera.ui.BottomBar
+                android:id="@+id/bottom_bar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:background="#00000000" >
+
+                <include layout="@layout/bottom_bar_contents" />
+
+            </com.uc.android.camera.ui.BottomBar>
+        </com.uc.android.camera.ui.StickyBottomCaptureLayout>
+
+        <FrameLayout
+            android:id="@+id/tutorials_placeholder_wrapper"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/fullscreen_dialog_background_color"
+            android:visibility="gone"
+            android:clickable="true" >
+        </FrameLayout>
+        <LinearLayout
+            android:id="@+id/accessibility_affordances"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="top|left"
+            android:visibility="gone">
+
+            <Button
+                android:id="@+id/accessibility_zoom_minus_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_zoom_minus"
+                android:visibility="gone"
+                android:contentDescription="@string/accessibility_mode_zoom_minus"/>
+            <Button
+                android:id="@+id/accessibility_zoom_plus_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_zoom_plus"
+                android:visibility="gone"
+                android:contentDescription="@string/accessibility_mode_zoom_plus"/>
+        </LinearLayout>
+    </FrameLayout>
+
     <com.uc.android.camera.ui.ModeTransitionView
         android:id="@+id/mode_transition_view"
         android:visibility="gone"

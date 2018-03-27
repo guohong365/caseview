@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.uc.caseview.layout.CompareItemActionsBar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/compare_item_options"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="top"
+    android:layout_margin="16dp"
+    android:background="#00000000"
+    android:visibility="visible">
+
+    <com.uc.android.camera.ui.TopRightWeightedLayout
+        android:id="@+id/compare_item_options_buttons"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.0"
+        android:background="@null"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:visibility="visible">
+
+        <ImageButton
+            android:id="@+id/btn_take_photo"
+            style="@style/ModeOption"
+            app:srcCompat="@drawable/ic_camera" />
+
+        <ImageButton
+            android:id="@+id/btn_edit_photo"
+            style="@style/ModeOption"
+            app:srcCompat="@drawable/ic_edit_normal" />
+
+        <com.uc.android.camera.MultiToggleImageButton
+            android:id="@+id/btn_marks"
+            style="@style/ModeOption" />
+    </com.uc.android.camera.ui.TopRightWeightedLayout>
+</com.uc.caseview.layout.CompareItemActionsBar>

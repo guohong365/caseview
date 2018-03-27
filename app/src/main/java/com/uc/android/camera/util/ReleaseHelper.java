@@ -18,7 +18,6 @@ package com.uc.android.camera.util;
 
 import android.app.Activity;
 
-import com.uc.android.camera.data.FilmstripItem;
 import com.uc.android.camera.settings.SettingsManager;
 
 public class ReleaseHelper {
@@ -29,10 +28,6 @@ public class ReleaseHelper {
 
     public static void showReleaseInfoDialog(Activity activity, Callback<Void> callback) {
         callback.onCallback(null);
-    }
-
-    public static boolean shouldShowReleaseInfoDialogOnShare(FilmstripItem data) {
-        return false;
     }
 
     public static boolean shouldLogVerbose() {

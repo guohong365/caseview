@@ -18,6 +18,7 @@ package com.uc.android.camera.settings;
 
 import android.content.Context;
 
+import com.uc.android.camera.ui.GridLines;
 import com.uc.android.camera.util.ApiHelper;
 import com.uc.caseview.R;
 
@@ -53,10 +54,12 @@ public class Keys {
     public static final String KEY_VIDEO_FIRST_USE_HINT_SHOWN =
             "pref_video_first_use_hint_shown_key";
     public static final String KEY_STARTUP_MODULE_INDEX = "camera.startup_module";
-    public static final String KEY_CAMERA_MODULE_LAST_USED =
-            "pref_camera_module_last_used_index";
+    public static final String KEY_CAMERA_MODULE_LAST_USED ="pref_camera_module_last_used_index";
     public static final String KEY_CAMERA_PANO_ORIENTATION = "pref_camera_pano_orientation";
     public static final String KEY_CAMERA_GRID_LINES = "pref_camera_grid_lines";
+    //TODO xxx
+    public static final String KEY_CAMERA_RULER_STYLE="pref_camera_ruler_style";
+
     public static final String KEY_RELEASE_DIALOG_LAST_SHOWN_VERSION =
             "pref_release_dialog_last_shown_version";
     public static final String KEY_FLASH_SUPPORTED_BACK_CAMERA =
@@ -169,6 +172,8 @@ public class Keys {
                 R.array.pref_camera_pano_orientation_entryvalues));
 
         settingsManager.setDefaults(KEY_CAMERA_GRID_LINES, false);
+        settingsManager.setDefaults(KEY_CAMERA_RULER_STYLE, 0,
+                context.getResources().getIntArray(R.array.pref_camera_ruler_styles));
 
         settingsManager.setDefaults(KEY_SHOULD_SHOW_REFOCUS_VIEWER_CLING, true);
 
@@ -221,6 +226,21 @@ public class Keys {
     public static boolean areGridLinesOn(SettingsManager settingsManager) {
         return settingsManager.getBoolean(SettingsManager.SCOPE_GLOBAL,
                                           KEY_CAMERA_GRID_LINES);
+    }
+    public static GridLines.RulerStyle getRulerStyle(SettingsManager settingsManager){
+        int style= settingsManager.getInteger(SettingsManager.SCOPE_GLOBAL, KEY_CAMERA_RULER_STYLE);
+        GridLines.RulerStyle rulerStyle= GridLines.RulerStyle.NONE;
+        switch (style){
+            case 0:
+                break;
+            case 1:
+                rulerStyle= GridLines.RulerStyle.BIG;
+                break;
+            case 2:
+                rulerStyle= GridLines.RulerStyle.SMALL;
+                break;
+        }
+        return rulerStyle;
     }
 }
 
