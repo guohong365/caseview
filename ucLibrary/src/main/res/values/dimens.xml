@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="margin_progress_wheel_line">10dp</dimen>
+    <dimen name="width_progress_wheel_line">2dp</dimen>
+    <dimen name="length_progress_wheel_line">20dp</dimen>
+    <dimen name="padding_progress_wheel">2dp</dimen>
+    <dimen name="height_wrapper_actions">72dp</dimen>
+    <dimen name="height_action_text">40dp</dimen>
+    <dimen name="size_option_label_selected_indicator">8dp</dimen>
+    <dimen name="margin_option_controls">10dp</dimen>
+    <dimen name="size_option_icon">20dp</dimen>
+    <dimen name="size_option_item">32dp</dimen>
+    <dimen name="padding_option_item">2dp</dimen>
+    <dimen name="margin_progress_wheel">4dp</dimen>
+    <dimen name="size_label">16dp</dimen>
+
+    <!--Crop View-->
+    <dimen name="default_crop_logo_size">200dp</dimen>
+    <dimen name="default_crop_grid_stoke_width">1dp</dimen>
+    <dimen name="default_crop_frame_stoke_width">1dp</dimen>
+    <dimen name="default_crop_rect_corner_touch_threshold">30dp</dimen>
+    <dimen name="default_crop_rect_min_size">100dp</dimen>
+    <dimen name="default_crop_rect_corner_touch_area_line_length">10dp</dimen>
+
+</resources>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/rotation_wheel_wrapper"
+    android:id="@+id/layout_rotate_wheel" android:visibility="gone">
+    <TextView style="@style/rotation_wheel_label"
+              android:id="@+id/label_rotation_wheel" android:text="30°" android:textColor="@android:color/white"/>
+    <com.uc.android.widget.VerticalProgressWheelView
+        style="@style/rotation_wheel"
+        android:id="@+id/rotation_wheel"/>
+</LinearLayout>

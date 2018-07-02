@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/label"
+        android:text="30°"
+        android:rotation="-90"
+        android:layout_gravity="center_vertical"/>
+    <com.uc.android.widget.ProgressWheelView
+        android:layout_width="@dimen/length_progress_wheel_line"
+        android:layout_height="match_parent"
+        android:id="@+id/wheel"
+        android:layout_margin="@dimen/margin_progress_wheel"
+        app:line_color="@color/color_active_widget"
+        app:middle_line_color="@color/color_wheel_middle_line"
+        app:line_width="@dimen/width_progress_wheel_line"
+        app:line_length="@dimen/length_progress_wheel_line"
+        app:line_space="@dimen/margin_progress_wheel_line"
+        app:orientation="vertical" />
+</merge>

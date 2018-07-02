@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.uc.android.widget.ColorItemView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/option_item.frame">
+    <ImageView
+        style="@style/option_item"
+        android:duplicateParentState="true"
+    />
+</com.uc.android.widget.ColorItemView>

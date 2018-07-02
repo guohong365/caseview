@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="info_all_permissions_granted">已获得所需权限。</string>
+    <string name="info_permission_not_satisfied">未能取得所需权限。</string>
+    <string name="label_action_geometry">几何</string>
+    <string name="label_action_filter">滤镜</string>
+    <string name="label_action_tune">调整</string>
+    <string name="label_action_mark">标记</string>
+    <string name="title_image_process_activity">图像处理</string>
+</resources>

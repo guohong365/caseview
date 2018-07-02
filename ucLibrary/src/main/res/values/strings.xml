@@ -1,0 +1,56 @@
+<resources>
+    <string name="app_name" translatable="false">Utilities Library</string>
+    
+    <string name="format_rotation_wheel_label">%.1f°</string>
+    <string name="format_zoom_wheel_label">%d%%</string>
+
+    <string name="title_image_process_activity">Image Process</string>
+    <string name="info_all_permissions_granted">All permissions are granted.</string>
+    <string name="info_permission_not_satisfied">One or more permissions are not satisfied.</string>
+    
+    <string name="label_action_geometry">Geometry</string>
+    <string name="label_action_filter">Filter</string>
+    <string name="label_action_tune">Tune</string>
+    <string name="label_action_mark">Mark</string>
+
+    <string name="menu_title_accept">Accept</string>
+
+    <string name="category_filter_color">Color Filter</string>
+    <string name="category_filter_pixel">Pixel Filter</string>
+    <string name="category_filter_geometry">Geometry</string>
+    
+    <string name="name_filter_grey_scale">Gray Scale</string>
+    <string name="name_filter_brightness">Brightness</string>
+    <string name="name_filter_contrast">Contrast</string>
+    <string name="name_filter_gamma">Gamma</string>
+    <string name="name_filter_hue">Hue</string>
+    <string name="name_filter_saturation">Saturation</string>    
+    <string name="name_filter_black_white">Binary</string>
+    <string name="name_filter_invert">Invert</string>
+    <string name="name_filter_sepia_toning"></string>
+    <string name="name_filter_replace_color">Replace Color</string>
+    <string name="name_filter_transparency">Transparency</string>
+    <string name="name_filter_sharpen">Sharpen</string>
+    <string name="name_filter_smooth">Smooth</string>
+    <string name="name_filter_blur">Blur</string>
+    <string name="name_filter_emboss">Emboss</string>
+    <string name="name_filter_engrave">Engrave</string>
+    <string name="name_filter_snow">Snow</string>
+    <string name="name_filter_boost">Boost</string>
+    <string name="name_filter_tint">Tint</string>
+    <string name="name_filter_maen_removal">Mean Removal</string>
+    <string name="name_filter_normalize">Normalize</string>
+    <string name="name_filter_flip_vertical">Flip Vertical</string>
+    <string name="name_filter_flip_horizontal">Flip Horizontal</string>
+    <string name="name_filter_reflection">Reflection</string>
+    <string name="name_filter_shading">Shading</string>
+    <string name="name_filter_rotate">Rotate</string>
+
+
+    <string name="label_aspect_ratio_0">1:1</string>
+    <string name="label_aspect_ratio_1">3:4</string>
+    <string name="label_aspect_ratio_2">Original</string>
+    <string name="label_aspect_ratio_3">3:2</string>
+    <string name="label_aspect_ratio_4">16:9</string>
+
+</resources>

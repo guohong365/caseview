@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="IconicSeekBarView">
+        <attr name="icon" />
+        <attr name="max" format="integer" />
+        <attr name="progress" format="integer" />
+        <attr name="layout_view" format="reference"/>
+        <attr name="layout_icon" format="reference"/>
+        <attr name="layout_seek_bar" format="integer"/>
+    </declare-styleable>
+    <declare-styleable name="OptionBarLayout">
+        <attr name="option_control" format="reference"/>
+        <attr name="show_apply_buttons" format="boolean" />
+    </declare-styleable>
+    <declare-styleable name="AspectRatioLayout">
+        <attr name="ratio_base" format="integer"/>
+        <attr name="labels" format="reference"/>
+        <attr name="ratios" format="reference"/>
+    </declare-styleable>
+    <declare-styleable name="ActionItemView">
+        <attr name="layout"/>
+        <attr name="icon" />
+        <attr name="label" format="string"/>
+        <attr name="active_color" format="color"/>
+        <attr name="style">
+            <enum name="iconOnly" value="0"/>
+            <enum name="labelOnly" value="1"/>
+            <enum name="both" value="2"/>
+        </attr>
+    </declare-styleable>
+    <declare-styleable name="ProgressWheelView">
+        <attr name="line_width" format="dimension"/>
+        <attr name="line_length" format="dimension"/>
+        <attr name="line_space" format="dimension"/>
+        <attr name="line_color" format="color"/>
+        <attr name="middle_line_color" format="color"/>
+        <attr name="total" format="float"/>
+        <attr name="orientation" >
+            <enum name="horizontal" value="0"/>
+            <enum name="vertical" value="1"/>
+        </attr>
+    </declare-styleable>
+    <declare-styleable name="WrapperProgressWheel">
+        <attr name="layout" />
+        <attr name="read_only" format="boolean"/>
+        <attr name="with_label" format="boolean"/>
+
+        <!--
+        <attr name="text_color" format="color"/>
+        <attr name="text_size" format="dimension"/>
+
+        <attr name="wheel_line_length" format="dimension" />
+        <attr name="wheel_line_width" format="dimension"/>
+        <attr name="wheel_line_space" format="dimension"/>
+        <attr name="line_color" format="color"/>
+        <attr name="middle_line_color" format="color"/>
+        <attr name="total_distance" format="float"/>
+        -->
+    </declare-styleable>
+    <declare-styleable name="ImageEditorLayout">
+        <attr name="use_mark" format="boolean"/>
+    </declare-styleable>
+</resources>
